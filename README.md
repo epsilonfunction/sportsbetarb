@@ -15,3 +15,12 @@ Key Steps:
 4) Find ways to arbitrage it
 
 Focus on Football ONLY for now
+
+
+
+
+Misc 1: Accessing .venv for admin purposes
+# cd to .venv/Scripts
+# run: . activate
+# for .venv
+
