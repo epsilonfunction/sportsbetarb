@@ -1,6 +1,6 @@
 #!/usr/bin/bash 
-# Not working at the moment
+# For Git Bash in Windows
 
 cd .venv/Scripts/
-sh activate.bat
-cd ..
+. activate
+cd ../..

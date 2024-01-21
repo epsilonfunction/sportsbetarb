@@ -17,10 +17,17 @@ Key Steps:
 Focus on Football ONLY for now
 
 
+Official Steps
+Step 1: 
+activate venv
+
+Step 2:
+pip install -r requirements.txt
+
+
 
 
 Misc 1: Accessing .venv for admin purposes
-# cd to .venv/Scripts
-# run: . activate
-# for .venv
-
+# cd .venv/Scripts
+# . activate
+# cd ../..
