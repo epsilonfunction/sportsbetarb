@@ -9,7 +9,8 @@ Key Steps:
 1) Webscraping from betting sites
     Targets:
         - Singapore Pools
-	- 
+        - 1xbet
+        
 2) Use Apache Airflow to orchestrate the different python webscraping files
 3) Warehouse it on local PostgreSQL/NoSQL database. 
 4) Find ways to arbitrage it
@@ -23,6 +24,19 @@ activate venv
 
 Step 2:
 pip install -r requirements.txt
+
+Requirements:
+- Python 3.9
+- Selenium
+
+Unofficial Requirements:
+- You can connect to the following sites:
+    - www.singaporepools.com.sg
+    - sg.1xbet.com/en/line/football
+        - Access is based on connecting to Google Public DNS Service
+        - https://developers.google.com/speed/public-dns
+        - Use at own's risk
+
 
 
 
