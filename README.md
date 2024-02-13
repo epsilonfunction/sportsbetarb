@@ -45,3 +45,18 @@ Misc 1: Accessing .venv for admin purposes
 # cd .venv/Scripts
 # . activate
 # cd ../..
+
+
+Proposed Schema:
+Sgpools:
+{'Timestamp'
+    competition: {
+        'name': 'UEFA Champions League',
+        'federation':'UEFA',
+        'date': '2023-01-28',
+        'matches': {
+
+        }
+    }
+
+}
