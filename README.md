@@ -38,6 +38,13 @@ Unofficial Requirements:
         - Use at own's risk
 
 
+## Branches
+1. Main 
+    Production Branch
+2. Testing/Prototyping (Not created Yet)
+    As name suggests
+3. sgpools
+    Conversionof sgpools notebook into functional environment.
 
 
 
