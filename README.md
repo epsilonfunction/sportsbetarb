@@ -10,6 +10,7 @@ Key Steps:
     Targets:
         - Singapore Pools
         - 1xbet
+        - 22bet
         
 2) Use Apache Airflow to orchestrate the different python webscraping files
 3) Warehouse it on local PostgreSQL/NoSQL database. 
@@ -42,10 +43,12 @@ Unofficial Requirements:
 1. Main 
     Production Branch
 2. Testing/Prototyping (Not created Yet)
-    As name suggests
+    Some preliminary prototypes
+    2.1. 22bet: A scrape of https://22bets.me/en/live/football
+    
 3. sgpools
     Conversionof sgpools notebook into functional environment.
-
+4. 
 
 
 Misc 1: Accessing .venv for admin purposes
