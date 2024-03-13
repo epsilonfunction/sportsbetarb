@@ -29,6 +29,8 @@ pip install -r requirements.txt
 Requirements:
 - Python 3.9
 - Selenium
+- Pyterrasect and Terrasect Engine
+
 
 Unofficial Requirements:
 - You can connect to the following sites:
@@ -45,7 +47,7 @@ Unofficial Requirements:
 2. Testing/Prototyping (Not created Yet)
     Some preliminary prototypes
     2.1. 22bet: A scrape of https://22bets.me/en/live/football
-    
+
 3. sgpools
     Conversionof sgpools notebook into functional environment.
 4. 
