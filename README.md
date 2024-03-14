@@ -37,6 +37,9 @@ Unofficial Requirements:
         - https://developers.google.com/speed/public-dns
         - Use at own's risk
 
+Issues:
+1) Chromedriver Path not defined. Always downloaded and unzipped. May want to work on this
+
 
 ## Branches
 1. Main 
@@ -55,15 +58,16 @@ Misc 1: Accessing .venv for admin purposes
 
 
 Proposed Schema:
-Sgpools:
-{'Timestamp'
-    competition: {
-        'name': 'UEFA Champions League',
-        'federation':'UEFA',
-        'date': '2023-01-28',
-        'matches': {
-
-        }
+{
+    Event_Date: {
+        Event_Time: {
+            Event_ID: {
+                Matchup: X vs Y
+                BetType: {
+                    "1/2 Goal"
+                }
+            }
+        } 
     }
-
 }
+
