@@ -26,9 +26,17 @@ activate venv
 Step 2:
 pip install -r requirements.txt
 
+    2a. Dev Note: requirements.txt generated with: 
+    
+    pipreqs ./ --ignore .venv
+ 
+
 Requirements:
 - Python 3.9
+
+Dependencies Used:
 - Selenium
+- PyMongo
 - Pyterrasect and Terrasect Engine
 
 
