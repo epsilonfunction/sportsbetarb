@@ -15,7 +15,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import Chrome
 
-def event_filter (event_string:str):
+def event_filter (event_string:str,bettype:str) -> tuple():
 
     date_pattern = r'^(\w{3}, \d{2} \w{3} \d{4})$'
     time_pattern = r'^(\d{1,2}.\d{2}(am|pm))$'
@@ -40,6 +40,14 @@ def event_filter (event_string:str):
     match_id = match_id_match.group(1) if match_id_match else None
     team1, team2 = teams_match.groups(1) if teams_match else (None, None)
     handicap = handicap_match.group(1) if handicap_match else None
+    
+    if bettype is "1/2 Goal":
+        odds_pattern=r'0[1|2] (\d*\.\d*) [\w} ]* ([\+|\-][\d|\.]*)*'
+        odds_match = re.search(odds_pattern,event_string,re.MULTILINE)
+        home_odds, home_handicap,away_odds,away_handicap = odds_match.group(1), odds_match.group(2) if odds_match else (None, None)
+        
+        return date_of,time_of,match_id,team1,team2, handicap, home_odds, away_odds
+
     # home_score, away_score, goal = score_match.groups() if score_match else (None, None, None)
     # home_odds, away_odds = odds_match.group(2), odds_match.group(5) if odds_match else (None, None)
 
