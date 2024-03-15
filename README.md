@@ -41,8 +41,10 @@ Unofficial Requirements:
 ## Branches
 1. Main 
     Production Branch
-2. Testing/Prototyping (Not created Yet)
-    As name suggests
+2. Testing/Prototyping
+    - Docker Deployment of sgpools (might merge into sgpools once sgpools is ready)
+    - PyMongo (Not created Yet)
+        Dumping of data into mongodb datalake
 3. sgpools
     Conversionof sgpools notebook into functional environment.
 
