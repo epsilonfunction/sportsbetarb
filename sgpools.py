@@ -327,10 +327,10 @@ class SgPoolsScraper(SgPools):
                             # print(betdetails)
 
 
-                events_text = {bet_type : event.text.split('\n')}
-                # events_text = {bet_type : event.json()}
-                with open("sg_pools2.json",'a') as json_file:
-                    json_file.write(json.dumps(events_text))
+            events_text = {bet_type : event.text.split('\n')}
+            # events_text = {bet_type : event.json()}
+            with open("sg_pools2.json",'a') as json_file:
+                json_file.write(json.dumps(events_text))
 
         with open("sgpools3.json",'w') as json_file:
             json_file.write(json.dumps(toJson))
