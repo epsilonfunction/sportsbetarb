@@ -58,8 +58,14 @@ Issues:
         Dumping of data into mongodb datalake
 3. sgpools
     Conversionof sgpools notebook into functional environment.
-
-
+    TODO:
+    1) "1/2 Goal" Pattern Matching -done-
+    2) "1st Goal Scorer" Pattern Matching 
+    3) "1X2" Pattern Matching 
+    4) "Asian Handicap/HT Asian Handicap" Regex Matching
+    9) Testcase Writing/Saving
+        a) Event stream
+        b) HTML scrape
 
 Misc 1: Accessing .venv for admin purposes
 # cd .venv/Scripts
