@@ -3,6 +3,7 @@
 import numpy as np 
 # import pandas as pd
 import time
+import datetime
 import json
 import logging 
 import re
@@ -15,39 +16,106 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import Chrome
 
-def event_filter (event_string:str,bettype:str) -> tuple():
+from functools import cache
+
+@cache
+def regex_bettype_filter(searchitem:str):
+    """Returns regex pattern to search for
+
+    Args:
+        bettype (str): _description_
+    """
+    
+    #Event Types
+    if searchitem=='date_pattern':
+        return re.compile(r'^(\w{3}, \d{2} \w{3} \d{4})$',re.MULTILINE)
+    if searchitem=='time_pattern':
+        return re.compile(r'(\d\.\d+\w{2})',re.MULTILINE)
+    if searchitem=='match_pattern':
+        return re.compile(r'(\d{4})\\',re.MULTILINE)
+    if searchitem=='teams_pattern':
+        return re.compile(r'^([\w\s]+) vs ([\w\s]+)$',re.MULTILINE)
+    if searchitem=='odds_pattern':
+        return re.compile(r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$',re.MULTILINE)
+    
+    #Betting Types
+    if searchitem=='1/2 Goal':
+        return re.compile(r'0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
+    # if searchitem=='time_pattern':
+    #     return r'^(\d{1,2}.\d{2}(am|pm))$'
+    
+
+def event_filter (event_string:str,bettype:str="Default") -> tuple():
+
+    """ 
+    Cthulhu Below:` 
+    ^(\w{3}, \d{2} \w{3} \d{4})\\n(\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*\\n.{23}(.{4})\\n(?:[\w|\s]+)(.{4}).{7}(.{4})\\n(?:[\w|\s]+)(.{4})
+
+    Explanation: 
+        ^(\w{3}, \d{2} \w{3} \d{4}): {Date}
+        (\d\.\d{2}\w{2})\\n(\d{4}): {Time} and {Event} ID Matching
+        ([\w|\s]+)\svs\s([\w|\s]+)*: {Home} team vs {Away} team
+        \\n.{23}(.{4}): 
+            Home Team 1/2 goal odds generally follow this form:
+            \n(+17)\n461/2 Goal\n01\n4.80
+            captures {4.80}
+            Might need to be more robust
+        More to be done later.
+        
+        
+    Cthulhu 2:
+    (\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*\\n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\\n(?:[\w|\s]+)(.{4})
+    """
 
     date_pattern = r'^(\w{3}, \d{2} \w{3} \d{4})$'
     time_pattern = r'^(\d{1,2}.\d{2}(am|pm))$'
     match_pattern = r'^(\d+)$'
     teams_pattern = r'^([\w\s]+) vs ([\w\s]+)$'
-    handicap_pattern = r'^\(([-+]?\d+)\)$'
-    score_pattern = r'^(\d+)/(\d+)\s([\w\s]+)$'
+    # handicap_pattern = r'^\(([-+]?\d+)\)$'
+    # score_pattern = r'^(\d+)/(\d+)\s([\w\s]+)$'
     odds_pattern = r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$'
 
     # Find matches for each pattern
-    date_match = re.search(date_pattern, event_string, re.MULTILINE)
-    time_match = re.search(time_pattern, event_string, re.MULTILINE)
-    match_id_match = re.search(match_pattern, event_string, re.MULTILINE)
-    teams_match = re.search(teams_pattern, event_string, re.MULTILINE)
-    handicap_match = re.search(handicap_pattern, event_string, re.MULTILINE)
-    score_match = re.search(score_pattern, event_string, re.MULTILINE)
-    odds_match = re.search(odds_pattern, event_string, re.MULTILINE)
+    date_match = regex_bettype_filter(searchitem='date_pattern').search(event_string)
+    
+    try:
+        time_match = regex_bettype_filter(searchitem='time_pattern').search(event_string)
+        match_id_match = regex_bettype_filter(searchitem='match_pattern').search(event_string)
+        teams_match = regex_bettype_filter(searchitem='teams_pattern').search(event_string)
+        odds_pattern = regex_bettype_filter(searchitem='odds_pattern').search(event_string)
+        # date_match = re.search(date_pattern, event_string, re.MULTILINE)
+        # time_match = re.search(time_pattern, event_string, re.MULTILINE)
+        # match_id_match = re.search(match_pattern, event_string, re.MULTILINE)
+        # teams_match = re.search(teams_pattern, event_string, re.MULTILINE)
+        # handicap_match = re.search(handicap_pattern, event_string, re.MULTILINE)
+        # score_match = re.search(score_pattern, event_string, re.MULTILINE)
+        # odds_match = re.search(odds_pattern, event_string, re.MULTILINE)
 
+    except:
+        time_match,match_id_match,teams_match,odds_pattern = None,None,None,None
     # Extract matched components
     date_of = date_match.group(1) if date_match else None
     time_of = time_match.group(1) if time_match else None
     match_id = match_id_match.group(1) if match_id_match else None
     team1, team2 = teams_match.groups(1) if teams_match else (None, None)
-    handicap = handicap_match.group(1) if handicap_match else None
+    # handicap = handicap_match.group(1) if handicap_match else None
     
-    if bettype is "1/2 Goal":
-        odds_pattern=r'0[1|2] (\d*\.\d*) [\w} ]* ([\+|\-][\d|\.]*)*'
-        odds_match = re.search(odds_pattern,event_string,re.MULTILINE)
-        home_odds, home_handicap,away_odds,away_handicap = odds_match.group(1), odds_match.group(2) if odds_match else (None, None)
+    if match_id is None:
+        return date_of,time_of,match_id,team1,team2, None, None, None
+    
+    if bettype=="1/2 Goal":
+  
+        odds_pattern=r'0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*'
+        odds_match = re.findall(odds_pattern,event_string,re.MULTILINE)
+        home_odds, home_handicap, = odds_match[0] if odds_match else None,None
+        away_odds,away_handicap = odds_match[1] if odds_match else None,None
         
-        return date_of,time_of,match_id,team1,team2, handicap, home_odds, away_odds
+        logging.info(f"{team1} vs {team2} for {bettype} at {home_odds};{away_odds}")
+        return date_of,time_of,match_id,team1,team2, home_handicap, home_odds, away_odds
 
+    elif bettype=="Default":
+        return date_of,time_of,match_id,team1,team2, None, None, None
+        
     # home_score, away_score, goal = score_match.groups() if score_match else (None, None, None)
     # home_odds, away_odds = odds_match.group(2), odds_match.group(5) if odds_match else (None, None)
 
@@ -61,7 +129,6 @@ def event_filter (event_string:str,bettype:str) -> tuple():
     # print("Home Odds:", home_odds)
     # print("Away Odds:", away_odds)
 
-    return date_of,time_of,match_id,team1,team2, handicap
 
 
 def isEventDate(inp:str) -> bool:
@@ -94,6 +161,12 @@ def isEventId(inp:str) -> bool:
 
 
 if __name__ == "__main__":
+    
+
+    logging.basicConfig(filename="sgpools_datacleaning.log",encoding='utf-8', level=logging.DEBUG)
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    logging.info("Current Time: " + current_time)
+
     target_url = "https://online.singaporepools.com/en/sports/category/1/football"
 
     options = webdriver.ChromeOptions()
@@ -125,17 +198,6 @@ if __name__ == "__main__":
     allmonths=set(['Jan','Feb','Mar','Apr','May','Jun',
                     'Jul','Aug','Sep','Oct','Nov','Dec'])
 
-
-
-    # import re
-    # word = 'fubar'
-    # regexp = re.compile(r'ba[rzd]')
-    # if regexp.search(word):
-    #   print('matched')
-
-
-
-
     eventdate=None
     eventtime=None
     eventid=None
@@ -144,6 +206,7 @@ if __name__ == "__main__":
 
     select_bet = Select(bet_type_specific)
     display_bet=driver.find_element(By.XPATH, "//button[@class='btn-block button button--orange btn btn-default']")
+   
     for bet_type in bet_type_list:
         select_bet.select_by_visible_text(bet_type)
         display_bet.click()
@@ -162,11 +225,19 @@ if __name__ == "__main__":
         more_bets = driver.find_elements(By.CLASS_NAME, "show-all")
         for more in more_bets:
             more.click()
+            
+        regex_matching_implemented = ['1/2 Goal']
+        
+        fst_val,sec_val = None,None
+        
         for event in events:
 
-            eventdate,eventtime,eventid,hometeam,awayteam,handicap=None,None,None,None,None,None
+            eventdate,eventtime,eventid,hometeam,awayteam,home_handicap, home_odds, away_odds=None,None,None,None,None,None,None,None
             
-            eventdate,eventtime,eventid,hometeam,awayteam,handicap=event_filter(event.text)
+            if bet_type in regex_matching_implemented:
+                eventdate,eventtime,eventid,hometeam,awayteam,home_handicap, home_odds, away_odds=event_filter(event.text,bet_type)
+            else:
+                eventdate,eventtime,eventid,hometeam,awayteam,home_handicap, home_odds, away_odds=event_filter(event.text)
             
             if eventtime is None:
                 continue
@@ -185,7 +256,14 @@ if __name__ == "__main__":
             if 'BetType' not in toJson[eventdate][eventtime][eventid]:
                 toJson[eventdate][eventtime][eventid]['BetType']={}
             
-            toJson[eventdate][eventtime][eventid]['BetType'][bet_type] = handicap
+            if bet_type not in toJson[eventdate][eventtime][eventid]['BetType']:
+                toJson[eventdate][eventtime][eventid]['BetType'][bet_type] = {}
+            
+            if home_odds is None:
+                toJson[eventdate][eventtime][eventid]['BetType'][bet_type] = None
+            else:
+                toJson[eventdate][eventtime][eventid]['BetType'][bet_type]['HomeOdds']=home_odds
+                toJson[eventdate][eventtime][eventid]['BetType'][bet_type]['AwayOdds']=away_odds
 
             events_text = {bet_type : event.text.split('\n')}
             # events_text = {bet_type : event.json()}
