@@ -19,12 +19,33 @@ from selenium.webdriver import Chrome
 from functools import cache
 
 @cache
-def regex_bettype_filter(searchitem:str):
+def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
+
     """Returns regex pattern to search for
 
     Args:
         bettype (str): _description_
     """
+    
+    #Betting Types
+    if searchitem=='match_info'and complex_pattern==True:
+        return re.compile(r'(\d*\.\d{2}\w{2})\s(\d{4})\\n([\w|\s]*)\svs\s([\w|\s]*)\s',re.MULTILINE)
+    
+    if searchitem=='1/2 Goal' and complex_pattern==True:
+
+        # Group 1: Event Time
+        # Group 2: Event ID
+        # Group 3: Team1 name
+        # Group 4: Team2 name
+        # Group 5: Team1 odds
+        # Group 6: Team1 handicap
+        # Group 7: Team2 odds
+        # Group 8: Team2 handicap
+    # match_info_pattern=r'(\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*'
+    # odds_pattern=r'\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)'
+
+        return re.compile(r'(\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*\\n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\\n(?:[\w|\s]+)(.{4})',re.MULTILINE)
+    
     
     #Event Types
     if searchitem=='date_pattern':
@@ -38,9 +59,9 @@ def regex_bettype_filter(searchitem:str):
     if searchitem=='odds_pattern':
         return re.compile(r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$',re.MULTILINE)
     
-    #Betting Types
     if searchitem=='1/2 Goal':
         return re.compile(r'0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
+    
     # if searchitem=='time_pattern':
     #     return r'^(\d{1,2}.\d{2}(am|pm))$'
     
@@ -65,6 +86,10 @@ def event_filter (event_string:str,bettype:str="Default") -> tuple():
         
     Cthulhu 2:
     (\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*\\n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\\n(?:[\w|\s]+)(.{4})
+    (\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*\\n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\\n(?:[\w|\s]+)(.{4})
+    
+    (\d*\.\d{2}\w{2})\s(\d{4})\\n([\w|\s]*)\svs\s([\w|\s]*)\s : Match Info
+    \\n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\\n(?:[\w|\s]+)(.{4}) : Odds Part
     """
 
     date_pattern = r'^(\w{3}, \d{2} \w{3} \d{4})$'
@@ -73,7 +98,36 @@ def event_filter (event_string:str,bettype:str="Default") -> tuple():
     teams_pattern = r'^([\w\s]+) vs ([\w\s]+)$'
     # handicap_pattern = r'^\(([-+]?\d+)\)$'
     # score_pattern = r'^(\d+)/(\d+)\s([\w\s]+)$'
-    odds_pattern = r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$'
+    
+    match_info_pattern=r'(\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*'
+    odds_pattern=r'\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)'
+    # odds_pattern = r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$'
+
+
+
+    # Find matches for each pattern
+    date_match = regex_bettype_filter(searchitem='date_pattern').search(event_string)
+
+    if bettype=="1/2 Goal":
+
+        # Group 1: Event Time
+        # Group 2: Event ID
+        # Group 3: Team1 name
+        # Group 4: Team2 name
+        # Group 5: Team1 odds
+        # Group 6: Team1 handicap
+        # Group 7: Team2 odds
+        # Group 8: Team2 handicap
+        
+        matchdata=regex_bettype_filter(searchitem='match_info',complex_pattern=True).search(event_string)
+        oddsdata=regex_bettype_filter(searchitem=bettype,complex_pattern=True).search(event_string)
+
+        dateOf=date_match.group() if date_match else None
+        matchdataresults = matchdata.group() if matchdata else None
+        oddsdata = oddsdata.group() if oddsdata else None
+
+        return date_match,matchdataresults,oddsdata
+
 
     # Find matches for each pattern
     date_match = regex_bettype_filter(searchitem='date_pattern').search(event_string)
@@ -131,33 +185,33 @@ def event_filter (event_string:str,bettype:str="Default") -> tuple():
 
 
 
-def isEventDate(inp:str) -> bool:
-    tempsplit = inp.split()
-    for component in tempsplit:
-        if component in allmonths:
-            logging.info(f"Input String ({inp}) appears to be valid event date.")
-            return True
-    return False
+# def isEventDate(inp:str) -> bool:
+#     tempsplit = inp.split()
+#     for component in tempsplit:
+#         if component in allmonths:
+#             logging.info(f"Input String ({inp}) appears to be valid event date.")
+#             return True
+#     return False
 
-def isEventTime(inp:str) -> bool:
-    validtimeregexp = re.compile(r'\.[0-9]{2}[a,p]m')#allows .30am and .62pm #special case of 'Ham' (hamburg) or 'Jamshedpur' is declined.
-    tempsplit = inp.split()
-    for component in tempsplit:
-        if validtimeregexp.search(component):
-            logging.info(f"Input String ({inp}) appears to be valid event time.")
-            return True
-        # if "am" in component or "pm" in component:
-        #     return True
-    return False
+# def isEventTime(inp:str) -> bool:
+#     validtimeregexp = re.compile(r'\.[0-9]{2}[a,p]m')#allows .30am and .62pm #special case of 'Ham' (hamburg) or 'Jamshedpur' is declined.
+#     tempsplit = inp.split()
+#     for component in tempsplit:
+#         if validtimeregexp.search(component):
+#             logging.info(f"Input String ({inp}) appears to be valid event time.")
+#             return True
+#         # if "am" in component or "pm" in component:
+#         #     return True
+#     return False
 
-def isEventId(inp:str) -> bool:
-    try: 
-        if eval(inp) == 2024 or 999> eval(inp) or eval(inp)>9999:
-            return False
-        logging.info(f"Input String ({inp}) appears to be valid event ID.")
-        return True
-    except:
-        return False
+# def isEventId(inp:str) -> bool:
+#     try: 
+#         if eval(inp) == 2024 or 999> eval(inp) or eval(inp)>9999:
+#             return False
+#         logging.info(f"Input String ({inp}) appears to be valid event ID.")
+#         return True
+#     except:
+#         return False
 
 
 if __name__ == "__main__":
@@ -207,7 +261,11 @@ if __name__ == "__main__":
     select_bet = Select(bet_type_specific)
     display_bet=driver.find_element(By.XPATH, "//button[@class='btn-block button button--orange btn btn-default']")
    
+    regex_matching_implemented = ['1/2 Goal']
     for bet_type in bet_type_list:
+
+        if bet_type not in regex_matching_implemented:
+            continue
         select_bet.select_by_visible_text(bet_type)
         display_bet.click()
         time.sleep(3) #Wait for elements to load
@@ -226,44 +284,70 @@ if __name__ == "__main__":
         for more in more_bets:
             more.click()
             
-        regex_matching_implemented = ['1/2 Goal']
         
         fst_val,sec_val = None,None
         
         for event in events:
 
-            eventdate,eventtime,eventid,hometeam,awayteam,home_handicap, home_odds, away_odds=None,None,None,None,None,None,None,None
+            eventdate,matchdata,oddsdata=None,None,None
             
             if bet_type in regex_matching_implemented:
-                eventdate,eventtime,eventid,hometeam,awayteam,home_handicap, home_odds, away_odds=event_filter(event.text,bet_type)
-            else:
-                eventdate,eventtime,eventid,hometeam,awayteam,home_handicap, home_odds, away_odds=event_filter(event.text)
+                eventdate,matchdata,oddsdata=event_filter(event.text,bet_type)
             
-            if eventtime is None:
+            if matchdata is None:
                 continue
 
-            if eventdate not in toJson:
-                toJson[eventdate] = {}
-            if eventtime not in toJson[eventdate]:
-                toJson[eventdate][eventtime]={}
-            if eventid not in toJson[eventdate][eventtime]:
-                toJson[eventdate][eventtime][eventid]={}
+            evdate=eventdate[0]
+            if len(eventdate)>1:
+                logging.warning(f"Parsed info contains more than 1 event date. {eventdate}. Only first event date is taken.")
+            if evdate not in toJson:
+                toJson[evdate] = {}
+            
+            idx=0
+            while idx < len(matchdata[0]):
+                # event time
+                if matchdata[0][idx] not in toJson[evdate]:
+                    toJson[evdate][matchdata[0][idx]]={}
+                #event id
+                if matchdata[1][idx] not in toJson[evdate][matchdata[0][idx]]:
+                    toJson[evdate][matchdata[0][idx]][matchdata[1][idx]]={}
+
+                toJson[evdate][matchdata[0][idx]][matchdata[1][idx]]['Home']=matchdata[2][idx]
+                toJson[evdate][matchdata[0][idx]][matchdata[1][idx]]['Away']=matchdata[3][idx]
+
+                if 'BetType' not in toJson[evdate][matchdata[0][idx]][matchdata[1][idx]]:
+                    toJson[evdate][matchdata[0][idx]][matchdata[1][idx]]['BetType']={}
+                
+                
+                if bet_type=="1/2 Goal":
+                    home_odds, home_handicap, away_odds, away_handicap = oddsdata[0][idx],oddsdata[1][idx],oddsdata[2][idx],oddsdata[3][idx]
+
+                    toJson[evdate][matchdata[0][idx]][matchdata[1][idx]]['BetType'][0]=home_odds
+                    toJson[evdate][matchdata[0][idx]][matchdata[1][idx]]['BetType'][1]=away_odds
+
+                idx+=1
+                
+
+            # if eventtime not in toJson[eventdate]:
+            #     toJson[eventdate][eventtime]={}
+            # if eventid not in toJson[eventdate][eventtime]:
+            #     toJson[eventdate][eventtime][eventid]={}
 
 
-            toJson[eventdate][eventtime][eventid]['Home']=hometeam
-            toJson[eventdate][eventtime][eventid]['Away']=awayteam
+            # toJson[eventdate][eventtime][eventid]['Home']=hometeam
+            # toJson[eventdate][eventtime][eventid]['Away']=awayteam
             
-            if 'BetType' not in toJson[eventdate][eventtime][eventid]:
-                toJson[eventdate][eventtime][eventid]['BetType']={}
+            # if 'BetType' not in toJson[eventdate][eventtime][eventid]:
+            #     toJson[eventdate][eventtime][eventid]['BetType']={}
             
-            if bet_type not in toJson[eventdate][eventtime][eventid]['BetType']:
-                toJson[eventdate][eventtime][eventid]['BetType'][bet_type] = {}
+            # if bet_type not in toJson[eventdate][eventtime][eventid]['BetType']:
+            #     toJson[eventdate][eventtime][eventid]['BetType'][bet_type] = {}
             
-            if home_odds is None:
-                toJson[eventdate][eventtime][eventid]['BetType'][bet_type] = None
-            else:
-                toJson[eventdate][eventtime][eventid]['BetType'][bet_type]['HomeOdds']=home_odds
-                toJson[eventdate][eventtime][eventid]['BetType'][bet_type]['AwayOdds']=away_odds
+            # if home_odds is None:
+            #     toJson[eventdate][eventtime][eventid]['BetType'][bet_type] = None
+            # else:
+            #     toJson[eventdate][eventtime][eventid]['BetType'][bet_type]['HomeOdds']=home_odds
+            #     toJson[eventdate][eventtime][eventid]['BetType'][bet_type]['AwayOdds']=away_odds
 
             events_text = {bet_type : event.text.split('\n')}
             # events_text = {bet_type : event.json()}
