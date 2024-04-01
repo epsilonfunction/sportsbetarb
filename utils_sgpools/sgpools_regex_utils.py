@@ -16,7 +16,7 @@ def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
     
     #Betting Types
     if searchitem=='match_info'and complex_pattern==True:
-        return re.compile(r'(\d+\.\d{2}\w{2})\s(\d{4})\\n([\w|\s]+?)\svs\s([\w|\s]+?)\s',re.MULTILINE)
+        return re.compile(r'^(\d+\.\d{2}\w{2})\s(\d{4})\\n([\w|\s]+?)\svs\s([\w|\s]+?)\s',re.MULTILINE)
     
     if searchitem=='1/2 Goal' and complex_pattern==True:
 
@@ -35,19 +35,53 @@ def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
     
     
     #Event Types
-    if searchitem=='date_pattern':
-        return re.compile(r'^(\w{3}, \d{2} \w{3} \d{4})$',re.MULTILINE)
-    if searchitem=='time_pattern':
-        return re.compile(r'(\d\.\d+\w{2})',re.MULTILINE)
-    if searchitem=='match_pattern':
-        return re.compile(r'(\d{4})\\',re.MULTILINE)
-    if searchitem=='teams_pattern':
-        return re.compile(r'^([\w\s]+) vs ([\w\s]+)$',re.MULTILINE)
-    if searchitem=='odds_pattern':
-        return re.compile(r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$',re.MULTILINE)
+    # match searchitem:
+    #     case 'date_pattern':
+    #         return re.compile(r'^(\w{3}, \d{2} \w{3} \d{4})$',re.MULTILINE)
+    #     case 'time_pattern':
+    #         return re.compile(r'(\d\.\d+\w{2})',re.MULTILINE)
+    #     case _:
+    #         return re.compile(r'^(\w{3}, \d{2} \w{3} \d{4})$',re.MULTILINE)
+        
+    # return pattern_to_return
     
-    if searchitem=='1/2 Goal':
-        return re.compile(r'0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
+                  
+    match searchitem:
+        case 'date_pattern':
+            return re.compile(r'^(\w{3}, \d{2} \w{3} \d{4})$',re.MULTILINE)
+        case 'time_pattern':
+            return re.compile(r'(\d\.\d+\w{2})',re.MULTILINE)
+        case 'match_pattern':
+            return re.compile(r'(\d{4})\\',re.MULTILINE)
+        case 'teams_pattern':
+            return re.compile(r'^([\w\s]+) vs ([\w\s]+)$',re.MULTILINE)
+        case 'odds_pattern':
+            return re.compile(r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$',re.MULTILINE)
+        case '1/2 Goal':
+            return re.compile(r'^0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
+        case 'match_details_pattern':
+            return r'(\d*\.\d{2}\w{2}) (\d{4})\n([\w\s]*) vs ([\w\s]*)'
+    
+    
+    # if searchitem=='date_pattern':
+    #     return re.compile(r'^(\w{3}, \d{2} \w{3} \d{4})$',re.MULTILINE)
+    # if searchitem=='time_pattern':
+    #     return re.compile(r'(\d\.\d+\w{2})',re.MULTILINE)
+    # if searchitem=='match_pattern':
+    #     return re.compile(r'(\d{4})\\',re.MULTILINE)
+    # if searchitem=='teams_pattern':
+    #     return re.compile(r'^([\w\s]+) vs ([\w\s]+)$',re.MULTILINE)
+    # if searchitem=='odds_pattern':
+    #     return re.compile(r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$',re.MULTILINE)
+    
+    # if searchitem=='1/2 Goal':
+    #     return re.compile(r'^0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
+    
+    # if searchitem=='match_details_pattern':
+    #     return r'(\d*\.\d{2}\w{2}) (\d{4})\n([\w\s]*) vs ([\w\s]*)'
+    
+    
+    
     
     # if searchitem=='time_pattern':
     #     return r'^(\d{1,2}.\d{2}(am|pm))$'
@@ -85,8 +119,8 @@ def event_filter (event_string:str,bettype:str="Default") -> tuple():
     # handicap_pattern = r'^\(([-+]?\d+)\)$'
     # score_pattern = r'^(\d+)/(\d+)\s([\w\s]+)$'
     
-    match_info_pattern=r'(\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*'
-    odds_pattern=r'\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)'
+    match_info_pattern=r'^(\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*'
+    odds_pattern=r'^\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)'
     # odds_pattern = r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$'
 
 
@@ -162,24 +196,33 @@ if __name__ == "__main__":
 
     TestString='Sat, 16 Mar 2024\n10.30pm 3589\nDarmstadt vs Bayern Munich (Live)\n01\n-.--\n02\n-.--\n03\n-.--\n10.30pm 3576\nHeidenheim vs Monchengladbach (Live)\n01\n9.50\n02\n3.60\n03\n1.37\n10.30pm 3550\nMainz vs Bochum (Live)\n01\n1.23\n02\n4.30\n03\n12.00\n10.30pm 3548\nWolfsburg vs Augsburg (Live)\n01\n-.--\n02\n-.--\n03\n-.--\n11.00pm 3714\nBurnley vs Brentford (Live)\n01\n1.17\n02\n5.00\n03\n16.00\n11.00pm 3754\nLuton vs Nottingham (Live)\n01\n6.50\n02\n3.75\n03\n1.45\n11.00pm 3695\nWest Bromwich vs Bristol City (Live)\n01\n1.17\n02\n5.00\n03\n16.00\n11.15pm 3551\nOsasuna vs Real Madrid (Live)\n01\n13.00\n02\n5.20\n03\n1.17\n11.15pm 3708\nEibar vs Villarreal (B) (Live)\n01\n1.67\n02\n2.90\n03\n5.20'
 
-    date_match = regex_bettype_filter(searchitem='date_pattern',complex_pattern=True).search(TestString)
-    print("Test Date Regex")
-    print(date_match) 
+    details_regex_group = re.findall(regex_bettype_filter('match_details_pattern', False),TestString)
+    print("Collated Match Details")
+    print(details_regex_group)
 
 
-    testregex=regex_bettype_filter('match_info',complex_pattern=True).search(TestString)
-    testoutputs = event_filter(TestString,bettype="1/2 Goal")
 
-    print("Test Regex")
-    print(testregex) 
+
+    # Maybe Deprecated
     
-    print("Test Outputs")
-    print(testoutputs)
+    # date_match = regex_bettype_filter(searchitem='date_pattern',complex_pattern=True).search(TestString)
+    # print("Test Date Regex")
+    # print(date_match) 
 
-    print("Bet Odds Test")
-    oddsregex=regex_bettype_filter('1/2 Goal',complex_pattern=True).search(TestString)
-    print(oddsregex)
 
-    print("Bet Odds Old Pattern")
-    oddsregex=regex_bettype_filter('odds_pattern',complex_pattern=False).search(TestString)
-    print(oddsregex)
+    # testregex=regex_bettype_filter('match_info',complex_pattern=False).search(TestString)
+    # testoutputs = event_filter(TestString,bettype="1/2 Goal")
+
+    # print("Test Regex")
+    # print(testregex) 
+    
+    # print("Test Outputs")
+    # print(testoutputs)
+
+    # print("Bet Odds Test")
+    # oddsregex=regex_bettype_filter('1/2 Goal',complex_pattern=True).search(TestString)
+    # print(oddsregex)
+
+    # print("Bet Odds Old Pattern")
+    # oddsregex=regex_bettype_filter('odds_pattern',complex_pattern=False).search(TestString)
+    # print(oddsregex)
