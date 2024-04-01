@@ -59,9 +59,14 @@ def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
             return re.compile(r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$',re.MULTILINE)
         case '1/2 Goal':
             return re.compile(r'^0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
+        case 'date_pattern1':
+            return r'(\w*, \d* \w* \d{4})'
         case 'match_details_pattern':
-            return r'(\d*\.\d{2}\w{2}) (\d{4})\n([\w\s]*) vs ([\w\s]*)'
-    
+            # Includes Time, Event ID, Home Team, Away Team
+            # return r'(\d*\.\d{2}\w{2}) (\d{4})\\n([\w\s]*) vs ([\w\s]*)'
+            # return r'(\d*\.\d{2}\w{2})[\\n|\s](\d{4})\\n([\w\s]*) vs ([\w\s]*)'
+            return r'(\d*\.\d{2}\w{2})[\n\s](\d{4})[\n\s]([\w\s]*) vs ([\w\s]*)'
+
     
     # if searchitem=='date_pattern':
     #     return re.compile(r'^(\w{3}, \d{2} \w{3} \d{4})$',re.MULTILINE)
@@ -196,7 +201,11 @@ if __name__ == "__main__":
 
     TestString='Sat, 16 Mar 2024\n10.30pm 3589\nDarmstadt vs Bayern Munich (Live)\n01\n-.--\n02\n-.--\n03\n-.--\n10.30pm 3576\nHeidenheim vs Monchengladbach (Live)\n01\n9.50\n02\n3.60\n03\n1.37\n10.30pm 3550\nMainz vs Bochum (Live)\n01\n1.23\n02\n4.30\n03\n12.00\n10.30pm 3548\nWolfsburg vs Augsburg (Live)\n01\n-.--\n02\n-.--\n03\n-.--\n11.00pm 3714\nBurnley vs Brentford (Live)\n01\n1.17\n02\n5.00\n03\n16.00\n11.00pm 3754\nLuton vs Nottingham (Live)\n01\n6.50\n02\n3.75\n03\n1.45\n11.00pm 3695\nWest Bromwich vs Bristol City (Live)\n01\n1.17\n02\n5.00\n03\n16.00\n11.15pm 3551\nOsasuna vs Real Madrid (Live)\n01\n13.00\n02\n5.20\n03\n1.17\n11.15pm 3708\nEibar vs Villarreal (B) (Live)\n01\n1.67\n02\n2.90\n03\n5.20'
 
-    details_regex_group = re.findall(regex_bettype_filter('match_details_pattern', False),TestString)
+    date_regex_group = re.findall(regex_bettype_filter('date_pattern1', False),TestString,re.MULTILINE)
+    print("Collated Date Details")
+    print(date_regex_group)
+    
+    details_regex_group = re.findall(regex_bettype_filter('match_details_pattern', False),TestString,re.MULTILINE)
     print("Collated Match Details")
     print(details_regex_group)
 
