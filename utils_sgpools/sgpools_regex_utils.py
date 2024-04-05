@@ -16,7 +16,7 @@ def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
     
     #Betting Types
     if searchitem=='match_info'and complex_pattern==True:
-        return re.compile(r'^(\d+\.\d{2}\w{2})\s(\d{4})\\n([\w|\s]+?)\svs\s([\w|\s]+?)\s',re.MULTILINE)
+        return re.compile(r'^(\d+\.\d{2}\w{2})\s(\d{4})\n([\w|\s]+?)\svs\s([\w|\s]+?)\s',re.MULTILINE)
     
     if searchitem=='1/2 Goal' and complex_pattern==True:
 
@@ -28,10 +28,10 @@ def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
         # Group 6: Team1 handicap
         # Group 7: Team2 odds
         # Group 8: Team2 handicap
-    # match_info_pattern=r'(\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*'
+    # match_info_pattern=r'(\d\.\d{2}\w{2})\n(\d{4})\n([\w|\s]+)\svs\s([\w|\s]+)*'
     # odds_pattern=r'\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)'
 
-        return re.compile(r'(\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*\\n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\\n(?:[\w|\s]+)(.{4})',re.MULTILINE)
+        return re.compile(r'(\d\.\d{2}\w{2})\n(\d{4})\n([\w|\s]+)\svs\s([\w|\s]+)*\n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\n(?:[\w|\s]+)(.{4})',re.MULTILINE)
     
     
     #Event Types
@@ -57,16 +57,30 @@ def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
             return re.compile(r'^([\w\s]+) vs ([\w\s]+)$',re.MULTILINE)
         case 'odds_pattern':
             return re.compile(r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$',re.MULTILINE)
+        
+        case 'isLiveMatch': return r'\(Live\)'
+        
+        # case '1/2 Goal3': return r'\n01\n([\d|\.]*).*?\n02\n([\d|\.]*)'
+        case '1/2 Goal3': return r'\n01\n([\d.]*).*?\n.*?\n.*?\n([\d.]*)'
+        # case '1/2 Goal2': return r'\n(\d{4})\n.*?Goal\n01\n([\d.]+)'
+        # This is the working one (i think)
+        case '1/2 Goal2': return r'(\d{4})\n.*?\n.*?\n.*?(?:1/2 Goal\n01\n([\d.]*)).*?\n.*?\n.*?\n([\d.]*)'
+        # case '1/2 Goal2': return r'\n01\n([\d|\.]*)'
+        case '1/2 Goal1':
+            return r'\n01\n([\d|\.]*).+?\n02\n([\d|\.]*)'
         case '1/2 Goal':
-            return re.compile(r'^0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
+            # Returns groups of (matchID,home_odds, away_odds)
+            # return r'm\n(\d{4}).+?\n01\n([\d|\.]*)'
+            return r'm(?:\n|\s)(\d{4}).+?\n01\n([\d|\.]*).+?\n02\n([\d|\.]*)'
+            # return re.compile(r'^0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
         case 'date_pattern1':
             return r'(\w*, \d* \w* \d{4})'
         case 'match_details_pattern':
-            # Includes Time, Event ID, Home Team, Away Team
-            # return r'(\d*\.\d{2}\w{2}) (\d{4})\\n([\w\s]*) vs ([\w\s]*)'
-            # return r'(\d*\.\d{2}\w{2})[\\n|\s](\d{4})\\n([\w\s]*) vs ([\w\s]*)'
+            # Returns List[ Set(Time, Event ID, Home Team, Away Team) ]
             return r'(\d*\.\d{2}\w{2})[\n\s](\d{4})[\n\s]([\w\s]*) vs ([\w\s]*)'
-
+        case _ :
+            print("False")
+            return
     
     # if searchitem=='date_pattern':
     #     return re.compile(r'^(\w{3}, \d{2} \w{3} \d{4})$',re.MULTILINE)
@@ -95,13 +109,13 @@ def event_filter (event_string:str,bettype:str="Default") -> tuple():
 
     """ 
     Cthulhu Below:` 
-    ^(\w{3}, \d{2} \w{3} \d{4})\\n(\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*\\n.{23}(.{4})\\n(?:[\w|\s]+)(.{4}).{7}(.{4})\\n(?:[\w|\s]+)(.{4})
+    ^(\w{3}, \d{2} \w{3} \d{4})\n(\d\.\d{2}\w{2})\n(\d{4})\n([\w|\s]+)\svs\s([\w|\s]+)*\n.{23}(.{4})\n(?:[\w|\s]+)(.{4}).{7}(.{4})\n(?:[\w|\s]+)(.{4})
 
     Explanation: 
         ^(\w{3}, \d{2} \w{3} \d{4}): {Date}
-        (\d\.\d{2}\w{2})\\n(\d{4}): {Time} and {Event} ID Matching
+        (\d\.\d{2}\w{2})\n(\d{4}): {Time} and {Event} ID Matching
         ([\w|\s]+)\svs\s([\w|\s]+)*: {Home} team vs {Away} team
-        \\n.{23}(.{4}): 
+        \n.{23}(.{4}): 
             Home Team 1/2 goal odds generally follow this form:
             \n(+17)\n461/2 Goal\n01\n4.80
             captures {4.80}
@@ -110,11 +124,11 @@ def event_filter (event_string:str,bettype:str="Default") -> tuple():
         
         
     Cthulhu 2:
-    (\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*\\n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\\n(?:[\w|\s]+)(.{4})
-    (\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*\\n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\\n(?:[\w|\s]+)(.{4})
+    (\d\.\d{2}\w{2})\n(\d{4})\n([\w|\s]+)\svs\s([\w|\s]+)*\n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\n(?:[\w|\s]+)(.{4})
+    (\d\.\d{2}\w{2})\n(\d{4})\n([\w|\s]+)\svs\s([\w|\s]+)*\n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\n(?:[\w|\s]+)(.{4})
     
-    (\d*\.\d{2}\w{2})\s(\d{4})\\n([\w|\s]*)\svs\s([\w|\s]*)\s : Match Info
-    \\n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\\n(?:[\w|\s]+)(.{4}) : Odds Part
+    (\d*\.\d{2}\w{2})\s(\d{4})\n([\w|\s]*)\svs\s([\w|\s]*)\s : Match Info
+    \n.{23}(.{4}).{2}(?:[\w|\s]+)(.{4}).{7}(.{4})\n(?:[\w|\s]+)(.{4}) : Odds Part
     """
 
     date_pattern = r'^(\w{3}, \d{2} \w{3} \d{4})$'
@@ -124,7 +138,7 @@ def event_filter (event_string:str,bettype:str="Default") -> tuple():
     # handicap_pattern = r'^\(([-+]?\d+)\)$'
     # score_pattern = r'^(\d+)/(\d+)\s([\w\s]+)$'
     
-    match_info_pattern=r'^(\d\.\d{2}\w{2})\\n(\d{4})\\n([\w|\s]+)\svs\s([\w|\s]+)*'
+    match_info_pattern=r'^(\d\.\d{2}\w{2})\n(\d{4})\n([\w|\s]+)\svs\s([\w|\s]+)*'
     odds_pattern=r'^\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)'
     # odds_pattern = r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$'
 
@@ -201,6 +215,9 @@ if __name__ == "__main__":
 
     TestString='Sat, 16 Mar 2024\n10.30pm 3589\nDarmstadt vs Bayern Munich (Live)\n01\n-.--\n02\n-.--\n03\n-.--\n10.30pm 3576\nHeidenheim vs Monchengladbach (Live)\n01\n9.50\n02\n3.60\n03\n1.37\n10.30pm 3550\nMainz vs Bochum (Live)\n01\n1.23\n02\n4.30\n03\n12.00\n10.30pm 3548\nWolfsburg vs Augsburg (Live)\n01\n-.--\n02\n-.--\n03\n-.--\n11.00pm 3714\nBurnley vs Brentford (Live)\n01\n1.17\n02\n5.00\n03\n16.00\n11.00pm 3754\nLuton vs Nottingham (Live)\n01\n6.50\n02\n3.75\n03\n1.45\n11.00pm 3695\nWest Bromwich vs Bristol City (Live)\n01\n1.17\n02\n5.00\n03\n16.00\n11.15pm 3551\nOsasuna vs Real Madrid (Live)\n01\n13.00\n02\n5.20\n03\n1.17\n11.15pm 3708\nEibar vs Villarreal (B) (Live)\n01\n1.67\n02\n2.90\n03\n5.20'
 
+    TESTONEXTWO='Tue, 2 Apr 2024\n12.00am\n1348\nLecce vs Roma\n(+17)\n021/2 Goal\n01\n1.23\nLecce +1.5 \n02\n3.50\nRoma -1.5 \n12.30am\n1850\nIpswich vs Southampton\n(+17)\n461/2 Goal\n01\n4.80\nIpswich -1.5 \n02\n1.12\nSouthampton +1.5 \n1.15am\n6244\nViking FK vs Sarpsborg\n(+15)\n461/2 Goal\n01\n2.60\nViking FK -1.5 \n02\n1.40\nSarpsborg +1.5 \n2.45am\n1347\nInter vs Empoli\n(+17)\n461/2 Goal\n01\n1.50\nInter -1.5 \n02\n2.30\nEmpoli +1.5 \n3.00am\n1882\nLeeds vs Hull City\n(+17)\n461/2 Goal\n01\n2.05\nLeeds -1.5 \n02\n1.63\nHull City +1.5 \n3.00am\n1597\nVillarreal vs Atletico Madrid\n(+17)\n021/2 Goal\n01\n1.20\nVillarreal +1.5 \n02\n3.75\nAtletico Madrid -1.5 '
+
+
     date_regex_group = re.findall(regex_bettype_filter('date_pattern1', False),TestString,re.MULTILINE)
     print("Collated Date Details")
     print(date_regex_group)
@@ -209,8 +226,23 @@ if __name__ == "__main__":
     print("Collated Match Details")
     print(details_regex_group)
 
+    details_regex_group = re.findall(regex_bettype_filter('1/2 Goal', False),TESTONEXTWO,re.MULTILINE)
+    print("Collated Odds Details")
+    print(details_regex_group)
 
+    details_regex_group = re.findall(regex_bettype_filter('1/2 Goal1', False),TESTONEXTWO,re.MULTILINE)
+    print("Collated Odds Details 1")
+    print(details_regex_group)
 
+    details_regex_group = re.findall(regex_bettype_filter('1/2 Goal2', False),TESTONEXTWO,re.MULTILINE)
+    print("Collated Odds Details 2")
+    print(details_regex_group)
+    details_regex_group = re.findall(regex_bettype_filter('1/2 Goal3', False),TESTONEXTWO,re.MULTILINE)
+    print("Collated Odds Details 3")
+    print(details_regex_group)
+    details_regex_group = re.findall(regex_bettype_filter('1/2 Goal3', False),TestString,re.MULTILINE)
+    print("Collated Odds Details 3")
+    print(details_regex_group)
 
     # Maybe Deprecated
     
