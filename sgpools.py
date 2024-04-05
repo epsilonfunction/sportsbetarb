@@ -77,7 +77,9 @@ if __name__ == "__main__":
     eventtime=None
     eventid=None
     AllEventStrings=[]
-    toJson = {}
+    toJson = {"Date":[],
+              "EventID":[],
+              "Events":{}}
 
     select_bet = Select(bet_type_specific)
     display_bet=driver.find_element(By.XPATH, "//button[@class='btn-block button button--orange btn btn-default']")
@@ -99,30 +101,41 @@ if __name__ == "__main__":
             load_button.click()
         except:
             continue
+        
+        time.sleep(5)
 
-        events = driver.find_elements(By.XPATH,"//div[@class='event-list']//div[@class='event-list__group']")
         more_bets = driver.find_elements(By.CLASS_NAME, "show-all")
         for more in more_bets:
             more.click()
             
         
-        fst_val,sec_val = None,None
-        
+        time.sleep(5)
+                    
+        events = driver.find_elements(By.XPATH,"//div[@class='event-list']//div[@class='event-list__group']")
         for event in events:
+            
+            isLiveGroup=re.findall(regex_bettype_filter('isLiveMatch',False),event.text,re.MULTILINE)
+            
+            # Ignore Live Matches First
+            if len(isLiveGroup)==True:
+                print("Ignored Matches")
+                continue
 
             eventdate_groups=re.findall(regex_bettype_filter('date_pattern1',False),event.text,re.MULTILINE)
-            print("eventdate_groups")
-            print(eventdate_groups)
+            if len(eventdate_groups)>1:
+                logging.warning(f"Parsed info contains more than 1 event date. {eventdate_groups}. Only first event date is taken.")
+            # print("eventdate_groups")
+            # print(eventdate_groups)
             evdate = eventdate_groups[0]
             # evdate = "1st Jan 1970"
-            if evdate not in toJson:
-                toJson[evdate] = {}
+            if evdate not in toJson["Date"]:
+                toJson["Date"].append(evdate)
             
             if bet_type in regex_matching_implemented:
                 details_regex_group = re.findall(regex_bettype_filter('match_details_pattern', False),event.text)
                 print("details_regex_group")
                 print(details_regex_group)
-                eventdate,matchdata,oddsdata=event_filter(event.text,bet_type)
+                # eventdate,matchdata,oddsdata=event_filter(event.text,bet_type)
 
                 if len(details_regex_group) == 0:
                     continue 
@@ -130,20 +143,39 @@ if __name__ == "__main__":
                 for event_detail_grouped in details_regex_group:
                     eventtime,eventid,hometeam,awayteam = event_detail_grouped
                     
-                    if eventtime not in toJson[evdate]:
-                        toJson[evdate][eventtime] = {}
-                    if eventid not in toJson[evdate][eventtime]:
-                        toJson[evdate][eventtime][eventid] = {}
-                    if "Matchup" not in toJson[evdate][eventtime][eventid]:
-                        toJson[evdate][eventtime][eventid]["Matchup"] = f"{hometeam} vs {awayteam}"
                     
-            
+                    if eventid not in toJson["EventID"]:
+                        toJson["EventID"].append(eventid)
+                        toJson["Events"][eventid] = {}
+                        print(f"Added Event {eventid} into toJson")
+                        
+                        # toJson["Date"][evdate]["EventID"] = {eventid}
+                    
+                    if "Date" not in toJson["Events"][eventid].keys():
+                        toJson["Events"][eventid]["Date"] = evdate
+                        toJson["Events"][eventid]["Time"] = eventtime
+                        toJson["Events"][eventid]["Matchup"] = f"{hometeam} vs {awayteam}"
+                
+                match bet_type:
+                    case "1/2 Goal":
+                        
+                        betdetails = re.findall(regex_bettype_filter('1/2 Goal2',False),event.text,re.MULTILINE)
+                        for eventid,homeodds,awayodds in betdetails:
+                            toJson["Events"][eventid]["HomeOdds"] = homeodds
+                            toJson["Events"][eventid]["AwayOdds"] = awayodds 
+                            
+                            
+                    
+                    # if eventtime not in toJson[evdate]:
+                    #     toJson[evdate][eventtime] = {}
+                    # if eventid not in toJson[evdate][eventtime]:
+                    #     toJson[evdate][eventtime][eventid] = {}
+                    # if "Matchup" not in toJson[evdate][eventtime][eventid]:
+                    #     toJson[evdate][eventtime][eventid]["Matchup"] = f"{hometeam} vs {awayteam}"
             # if matchdata is None:
             #     continue
 
             # evdate=eventdate[0]
-            # if len(eventdate)>1:
-            #     logging.warning(f"Parsed info contains more than 1 event date. {eventdate}. Only first event date is taken.")
             # if evdate not in toJson:
             #     toJson[evdate] = {}
             
