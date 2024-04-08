@@ -147,7 +147,7 @@ if __name__ == "__main__":
                     if eventid not in toJson["EventID"]:
                         toJson["EventID"].append(eventid)
                         toJson["Events"][eventid] = {}
-                        print(f"Added Event {eventid} into toJson")
+                        logging.info(f"Added Event {eventid} into toJson")
                         
                         # toJson["Date"][evdate]["EventID"] = {eventid}
                     
@@ -161,9 +161,12 @@ if __name__ == "__main__":
                         
                         betdetails = re.findall(regex_bettype_filter('1/2 Goal2',False),event.text,re.MULTILINE)
                         for eventid,homeodds,awayodds in betdetails:
-                            toJson["Events"][eventid]["HomeOdds"] = homeodds
-                            toJson["Events"][eventid]["AwayOdds"] = awayodds 
                             
+                            try:
+                                toJson["Events"][eventid]["HomeOdds"] = homeodds
+                                toJson["Events"][eventid]["AwayOdds"] = awayodds 
+                            except:
+                                logging.warning(f"Fail to insert Odds ({homeodds},{awayodds}) for {eventid}")
                             
                     
                     # if eventtime not in toJson[evdate]:
