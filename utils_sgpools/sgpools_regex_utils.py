@@ -60,24 +60,25 @@ def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
         
         case 'isLiveMatch': return r'\(Live\)'
         
+        case '1X2': return r'(\d{4})\n.*?\n01\n([\d.]*)\n02\n([\d.]*)\n03\n([\d.]*)'
         # case '1/2 Goal3': return r'\n01\n([\d|\.]*).*?\n02\n([\d|\.]*)'
-        case '1/2 Goal3': return r'\n01\n([\d.]*).*?\n.*?\n.*?\n([\d.]*)'
-        # case '1/2 Goal2': return r'\n(\d{4})\n.*?Goal\n01\n([\d.]+)'
+        # case '1/2 Goal3': return r'\n01\n([\d.]*).*?\n.*?\n.*?\n([\d.]*)'
+        # # case '1/2 Goal2': return r'\n(\d{4})\n.*?Goal\n01\n([\d.]+)'
         # This is the working one (i think)
-        case '1/2 Goal2': return r'(\d{4})\n.*?\n.*?\n.*?(?:1/2 Goal\n01\n([\d.]*)).*?\n.*?\n.*?\n([\d.]*)'
-        # case '1/2 Goal2': return r'\n01\n([\d|\.]*)'
-        case '1/2 Goal1':
-            return r'\n01\n([\d|\.]*).+?\n02\n([\d|\.]*)'
-        case '1/2 Goal':
-            # Returns groups of (matchID,home_odds, away_odds)
-            # return r'm\n(\d{4}).+?\n01\n([\d|\.]*)'
-            return r'm(?:\n|\s)(\d{4}).+?\n01\n([\d|\.]*).+?\n02\n([\d|\.]*)'
-            # return re.compile(r'^0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
+        case '1/2 Goal': return r'(\d{4})\n.*?\n.*?\n.*?(?:1/2 Goal\n01\n([\d.]*)).*?\n.*?\n.*?\n([\d.]*)'
+        # # case '1/2 Goal2': return r'\n01\n([\d|\.]*)'
+        # case '1/2 Goal1':
+        #     return r'\n01\n([\d|\.]*).+?\n02\n([\d|\.]*)'
+        # case '1/2 Goal':
+        #     # Returns groups of (matchID,home_odds, away_odds)
+        #     # return r'm\n(\d{4}).+?\n01\n([\d|\.]*)'
+        #     return r'm(?:\n|\s)(\d{4}).+?\n01\n([\d|\.]*).+?\n02\n([\d|\.]*)'
+        #     # return re.compile(r'^0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
         case 'date_pattern1':
             return r'(\w*, \d* \w* \d{4})'
         case 'match_details_pattern':
             # Returns List[ Set(Time, Event ID, Home Team, Away Team) ]
-            return r'(\d*\.\d{2}\w{2})[\n\s](\d{4})[\n\s]([\w\s]*) vs ([\w\s]*)'
+            return r'(\d*\.\d{2}\w{2})[\n\s](\d{4})[\n\s]([\w\s]*) vs ([\w\s]*)\n'
         case _ :
             print("False")
             return
