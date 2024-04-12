@@ -53,7 +53,22 @@ class SgPools:
             "Total Goals Odd/Even",
             "Total Goals Over/Under",
             "Will Both Teams Score"]
-        self.__JsonSave={}
+
+class SgPoolsScraper(SgPools):
+    """A Generic Class to Scrape defined terms
+    """
+    def __init__(self) -> None:
+        super().__init__()
+        
+    def SetBetType(self,BetType:str)->None:
+        if BetType not in self.__BetTypes:
+            print(f"BetType: {BetType} not found. Please Try Again!")
+            logging.warning(f"BetType: {BetType} not found. Please Try Again!")
+            return None
+    
+class SgPoolsWriter(SgPools):
+    """A Class to write and store data
+    """
 
 if __name__ == "__main__":
     
@@ -104,8 +119,8 @@ if __name__ == "__main__":
     select_bet = Select(bet_type_specific)
     display_bet=driver.find_element(By.XPATH, "//button[@class='btn-block button button--orange btn btn-default']")
    
-    regex_matching_implemented = ['1/2 Goal',"1X2"]
-    regex_matching_WIP = ["Asian Handicap/HT Asian Handicap","Halftime 1x2","Halftime Total Goals"]
+    regex_matching_implemented = ['1/2 Goal',"1X2","Halftime 1x2"]
+    regex_matching_WIP = ["Asian Handicap/HT Asian Handicap","Halftime Total Goals"]
     __regex_matching_ = ["1/2 Goal",
         "1st Goal Scorer",
         "1X2",
@@ -159,7 +174,8 @@ if __name__ == "__main__":
             if bet_type not in regex_matching_implemented:
                 
                 if bet_type in regex_matching_WIP:
-                    print(event.text)
+                    pass
+                    # print(event.text)
                 # with open("sgpools_notimpl.txt","ab") as f:
                 #     # text_without_line_breaks = event.text.replace("\\n", "")
                 #     f.write(event.text.encode("utf-8"))
@@ -183,8 +199,8 @@ if __name__ == "__main__":
             
             if (bet_type in regex_matching_implemented) or (bet_type in regex_matching_WIP):
                 details_regex_group = re.findall(regex_bettype_filter('match_details_pattern', False),event.text)
-                print("details_regex_group")
-                print(details_regex_group)
+                # print("details_regex_group")
+                # print(details_regex_group)
                 # eventdate,matchdata,oddsdata=event_filter(event.text,bet_type)
 
                 if len(details_regex_group) == 0:
@@ -208,7 +224,7 @@ if __name__ == "__main__":
                 
                 match bet_type:
                     case "1/2 Goal":
-                        
+                        continue
                         betdetails = re.findall(regex_bettype_filter('1/2 Goal',False),event.text,re.MULTILINE)
                         for eventid,homeodds,awayodds in betdetails:
                             
@@ -220,7 +236,7 @@ if __name__ == "__main__":
                             except:
                                 logging.warning(f"Fail to insert Odds ({homeodds},{awayodds}) for {eventid}")
                     case "1X2"|"Halftime 1x2":
-                        
+                        continue
                         betdetails = re.findall(regex_bettype_filter('1X2'),event.text,re.MULTILINE)
                         for eventid,homeodds,drawodds,awayodds in betdetails:
                             try: 
@@ -231,7 +247,9 @@ if __name__ == "__main__":
                             except:
                                 logging.warning(f"Fail to insert Odds ({homeodds},{drawodds},{awayodds}) for {eventid} for {bet_type}")
                                 
-                             
+                    case "Asian Handicap/HT Asian Handicap":
+                        print("Asian Handicap/HT Asian Handicap")
+                        print(event.text)
 
                         # print("1X2")
                         # print(betdetails)
