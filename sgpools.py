@@ -69,6 +69,29 @@ class SgPoolsScraper(SgPools):
 class SgPoolsWriter(SgPools):
     """A Class to write and store data
     """
+    def __init__(self) -> None:
+        super().__init__()
+        self.LogWriteLoc = None 
+        self.DataWriteLoc = None
+    
+    def setLog(self,LogWriteLog=None)->bool:
+        if LogWriteLog == None:
+            print(f"Invalid Logging Location")
+            return False
+    def setWriteLocation(self,Location = None) -> bool:
+        if Location == None:
+            print(f"Invalid Location")
+            return False
+        else:
+            self.LogWriteLoc = Location
+            return True
+        
+        
+class LogsWriter(SgPoolsWriter):
+    def __init__(self) -> None:
+        super().__init__() 
+    def setWriteLocation(Location=None) -> bool:
+        return super().setWriteLocation()
 
 if __name__ == "__main__":
     
@@ -120,7 +143,7 @@ if __name__ == "__main__":
     display_bet=driver.find_element(By.XPATH, "//button[@class='btn-block button button--orange btn btn-default']")
    
     regex_matching_implemented = ['1/2 Goal',"1X2","Halftime 1x2"]
-    regex_matching_WIP = ["Asian Handicap/HT Asian Handicap","Halftime Total Goals"]
+    regex_matching_WIP = ["Asian Handicap/HT Asian Handicap","Halftime Total Goals","Handicap 1X2"]
     __regex_matching_ = ["1/2 Goal",
         "1st Goal Scorer",
         "1X2",
@@ -144,35 +167,52 @@ if __name__ == "__main__":
             continue
 
         select_bet.select_by_visible_text(bet_type)
+        # WebDriverWait(driver,3).until()
         display_bet.click()
         time.sleep(3) #Wait for elements to load
         
-
+        # This doesnt always work. Try to understand why
+        # try:
+        #     # Adjust the locator and the timeout as needed
+        #     element = WebDriverWait(driver, 10).until(
+        #         EC.presence_of_element_located((By.XPATH, "//div[@class='event-list']//div[@class='event-list__group']"))
+        #     )
+        #     events = driver.find_elements(By.XPATH,"//div[@class='event-list']//div[@class='event-list__group']")
+        # finally:
+        #     pass
         # Bet Type may not always be available; Skip to next bet type
         try:
             # Load More Button
             load_button = driver.find_element(By.CLASS_NAME,"event-list__load-all-events")
-            load_button.click()
         except: 
             continue
-        
-            
-        time.sleep(5)
+        load_button.click()
 
+        time.sleep(1)
         more_bets = driver.find_elements(By.CLASS_NAME, "show-all")
         for more in more_bets:
-            more.click()
-            
-        
+            more.click()        
         time.sleep(5)
-                    
         events = driver.find_elements(By.XPATH,"//div[@class='event-list']//div[@class='event-list__group']")
         
             
         for event in events:
             
+            # Strictly for testing purposes
+            # if bet_type in regex_matching_implemented:
+            #     continue
+            
+            # Also strictly for testing
+            # if bet_type not in regex_matching_WIP:
+            #     continue
+            
+            print(f"Starting to search for Bet Type of: {bet_type}")
+            print(event.text)
             if bet_type not in regex_matching_implemented:
-                
+            
+                # Only in production
+                # continue 
+            
                 if bet_type in regex_matching_WIP:
                     pass
                     # print(event.text)
@@ -182,7 +222,6 @@ if __name__ == "__main__":
                 #     # f.write("\n")
                     
                 # continue
-                
             isLiveGroup=re.findall(regex_bettype_filter('isLiveMatch',False),event.text,re.MULTILINE)
             
             # Ignore Live Matches First
@@ -224,7 +263,7 @@ if __name__ == "__main__":
                 
                 match bet_type:
                     case "1/2 Goal":
-                        continue
+                        # continue
                         betdetails = re.findall(regex_bettype_filter('1/2 Goal',False),event.text,re.MULTILINE)
                         for eventid,homeodds,awayodds in betdetails:
                             
@@ -236,7 +275,7 @@ if __name__ == "__main__":
                             except:
                                 logging.warning(f"Fail to insert Odds ({homeodds},{awayodds}) for {eventid}")
                     case "1X2"|"Halftime 1x2":
-                        continue
+                        # continue
                         betdetails = re.findall(regex_bettype_filter('1X2'),event.text,re.MULTILINE)
                         for eventid,homeodds,drawodds,awayodds in betdetails:
                             try: 
@@ -245,16 +284,27 @@ if __name__ == "__main__":
                                 toJson["Events"][eventid][bet_type]["DrawOdds"] = drawodds
                                 toJson["Events"][eventid][bet_type]["AwayOdds"] = awayodds
                             except:
-                                logging.warning(f"Fail to insert Odds ({homeodds},{drawodds},{awayodds}) for {eventid} for {bet_type}")
-                                
+                                logging.warning(f"Fail to insert Odds ({homeodds},{drawodds},{awayodds}) for {eventid} for {bet_type}")                               
                     case "Asian Handicap/HT Asian Handicap":
+                        # continue
+                    
+                        # WIP: Not fully implemented
+                        
+                        betdetails = re.findall(regex_bettype_filter('Asian Handicap/HT Asian Handicap'),event.text,re.MULTILINE)
                         print("Asian Handicap/HT Asian Handicap")
                         print(event.text)
+                        print(betdetails)
 
                         # print("1X2")
                         # print(betdetails)
-
-
+                    case "Handicap 1X2":
+                        continue
+                        # betdetails = re.findall(regex_bettype_filter('Handicap 1X2'),event.text,re.MULTILINE)
+                        print("Handicap 1X2")
+                        print(event.text)
+                        
+                        # print(betdetails)
+                    
             events_text = {bet_type : event.text.split('\n')}
             # events_text = {bet_type : event.json()}
             with open("sg_pools2.json",'a') as json_file:
