@@ -74,6 +74,8 @@ def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
         #     # return r'm\n(\d{4}).+?\n01\n([\d|\.]*)'
         #     return r'm(?:\n|\s)(\d{4}).+?\n01\n([\d|\.]*).+?\n02\n([\d|\.]*)'
         #     # return re.compile(r'^0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
+        case 'Asian Handicap': return r'\n(\d{4})\n.*?(?:Asian Handicap)'
+        
         case 'date_pattern1':
             return r'(\w*, \d* \w* \d{4})'
         case 'match_details_pattern':
@@ -244,6 +246,8 @@ if __name__ == "__main__":
     details_regex_group = re.findall(regex_bettype_filter('1/2 Goal3', False),TestString,re.MULTILINE)
     print("Collated Odds Details 3")
     print(details_regex_group)
+
+    asianhandicap_text="Tue, 11 Jun 2024\n6.14pm\n5828\nJapan vs Syria\n(+12)\n-Asian Handicap\n(Account Only)\n-\n1.88\nJapan -2.25 \n-\n1.93\nSyria +2.25 \n7.00pm\n5841\nKorea Republic vs China PR\n(+12)\n-Asian Handicap\n(Account Only)\n-\n1.8(8\nKorea Republic -1.75 \n-\n1.93\nChina PR +1.75 \n9.00pm\n5873\nMalaysia vs Chinese Taipei\n(+16)\n-Asian Handicap\n(Account Only)\n-\n1.85\nMalaysia -2.75 \n-\n1.87\nChinese Taipei +2.75     "
 
     # Maybe Deprecated
     
