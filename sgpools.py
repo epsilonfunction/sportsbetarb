@@ -132,6 +132,15 @@ class SgPoolsScraper(SgPools):
             return None
     
     # async def 
+    async def ScrapeBet(self,EventText:str,BetType:str='match_details_pattern')->None:
+        
+        RegexParse = regex_bettype_filter(searchitem=BetType)
+        BetDetails = None
+        match BetType:
+            case _:
+                return None
+        
+        return None
     
     def Scrape(self) -> None:
         if self.Writer == None:
@@ -292,9 +301,11 @@ class SgPoolsScraper(SgPools):
                                     toJson["Events"][eventid][bet_type]["AwayOdds"] = awayodds
                                 except:
                                     logging.warning(f"Fail to insert Odds ({homeodds},{drawodds},{awayodds}) for {eventid} for {bet_type}")
-                                    
+                                   
                         case "Asian Handicap/HT Asian Handicap":
+                            print("Logging Details for Asian Handicap Matches")
                             betdetails=re.findall(regex_bettype_filter('Asian Handicap'),event.text,re.MULTILINE)
+                            print(betdetails)
                             for eventid, homeodds, homehandicap, awayodds, awayhandicap in betdetails:
                                 try:
                                     toJson["Events"][eventid][bet_type] = {}
