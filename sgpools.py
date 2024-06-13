@@ -305,6 +305,9 @@ class SgPoolsScraper(SgPools):
                         case "Asian Handicap/HT Asian Handicap":
                             print("Logging Details for Asian Handicap Matches")
                             betdetails=re.findall(regex_bettype_filter('Asian Handicap'),event.text,re.MULTILINE)
+                            if len(betdetails)==0:
+                                logging.warning(f"Betdetails for {bet_type} not found.")
+                            
                             print(betdetails)
                             for eventid, homeodds, homehandicap, awayodds, awayhandicap in betdetails:
                                 try:
