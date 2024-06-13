@@ -74,7 +74,8 @@ def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
         #     # return r'm\n(\d{4}).+?\n01\n([\d|\.]*)'
         #     return r'm(?:\n|\s)(\d{4}).+?\n01\n([\d|\.]*).+?\n02\n([\d|\.]*)'
         #     # return re.compile(r'^0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
-        case 'Asian Handicap': return r'\n(\d{4})\n.*?(?:Asian Handicap)'
+        # case 'Asian Handicap': return r'\n(\d{4})\n.*?\n.*?\n.*?\n.*?([\d|\.]*)\n.*?\s([\d|\.|\+\-]*)\s\n.*?\n([\d|\.]*)\n.*?\s([\d|\.|\+\-]*)\s'
+        case 'Asian Handicap': return r'\n(\d{4})\n.*?\n.*?\n.*?\n.*?\n.*?\n.*?([\d|\.]*)\n.*?([\+|\-][\d|\.]*).*?\n.*?\n.*?([\d|\.]*)\n.*?([\+|\-][\d|\.]*)'
         
         case 'date_pattern1':
             return r'(\w*, \d* \w* \d{4})'
