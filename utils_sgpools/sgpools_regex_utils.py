@@ -81,7 +81,7 @@ def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
             # Returns List[ Set(Time, Event ID, Home Team, Away Team) ]
             return r'(\d*\.\d{2}\w{2})[\n\s](\d{4})[\n\s]([\w\s]*) vs ([\w\s]*)\n'
         case "Handicap 1x2": 
-            return r
+            return None
         case _ :
             print("False")
             return
