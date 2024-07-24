@@ -29,6 +29,14 @@ pip install -r requirements.txt
     
     pipreqs ./ --ignore .venv
  
+Step 3: 
+    a. Start MongoDB server
+        net start mongodb
+    b. stop MongoDB server
+        net stop mongodb
+    Default Port: localhost:27017
+
+
 
 Requirements:
 - Python 3.9
@@ -71,6 +79,8 @@ Misc 1: Accessing .venv for admin purposes
 # cd .venv/Scripts
 # . activate
 # cd ../..
+
+
 
 
 Proposed Schema:
