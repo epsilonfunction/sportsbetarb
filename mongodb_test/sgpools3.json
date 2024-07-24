@@ -1,0 +1,810 @@
+{
+    "Date": [
+        "Fri, 14 Jun 2024",
+        "Sat, 15 Jun 2024",
+        "Sun, 16 Jun 2024",
+        "Mon, 17 Jun 2024",
+        "Tue, 18 Jun 2024",
+        "Wed, 19 Jun 2024"
+    ],
+    "EventID": [
+        "5913",
+        "7057",
+        "4948",
+        "5912",
+        "5907",
+        "4949",
+        "4953",
+        "4951",
+        "5914",
+        "5911",
+        "4950",
+        "4952",
+        "0145",
+        "2018",
+        "5909",
+        "5908",
+        "4652",
+        "3154",
+        "2649",
+        "3181",
+        "3147",
+        "3149",
+        "2658",
+        "2024",
+        "2023",
+        "2025",
+        "4671",
+        "4659",
+        "4660",
+        "4649",
+        "4667",
+        "4683",
+        "4645",
+        "4674",
+        "4686",
+        "4665",
+        "4675",
+        "4661",
+        "4680",
+        "3164",
+        "3160",
+        "2664",
+        "2667",
+        "3161",
+        "3166",
+        "3162",
+        "3175",
+        "2675",
+        "2655",
+        "2638",
+        "2647",
+        "2680",
+        "2646",
+        "2020",
+        "2029",
+        "2028",
+        "2027",
+        "2030",
+        "2032",
+        "2026",
+        "2033"
+    ],
+    "Events": {
+        "5913": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "2.00am",
+            "Matchup": "Depor Riestra vs River Plate",
+            "1/2 Goal": {
+                "HomeOdds": "1.55",
+                "AwayOdds": "2.20"
+            }
+        },
+        "7057": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "3.00am",
+            "Matchup": "Espanyol vs Sporting Gijon",
+            "1/2 Goal": {
+                "HomeOdds": "3.15",
+                "AwayOdds": "1.28"
+            }
+        },
+        "4948": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "6.00am",
+            "Matchup": "Cruzeiro vs Cuiaba",
+            "1/2 Goal": {
+                "HomeOdds": "2.60",
+                "AwayOdds": "1.40"
+            }
+        },
+        "5912": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "6.00am",
+            "Matchup": "Sarmiento vs Estudiantes",
+            "1/2 Goal": {
+                "HomeOdds": "1.20",
+                "AwayOdds": "3.75"
+            }
+        },
+        "5907": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "6.00am",
+            "Matchup": "Tigre Argentina vs Belgrano",
+            "1/2 Goal": {
+                "HomeOdds": "5.50",
+                "AwayOdds": "1.09"
+            }
+        },
+        "4949": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "7.00am",
+            "Matchup": "Atl Paranaense vs Criciuma",
+            "1/2 Goal": {
+                "HomeOdds": "2.15",
+                "AwayOdds": "1.58"
+            }
+        },
+        "4953": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "7.00am",
+            "Matchup": "Flamengo vs Gremio",
+            "1/2 Goal": {
+                "HomeOdds": "2.35",
+                "AwayOdds": "1.48"
+            }
+        },
+        "4951": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "7.00am",
+            "Matchup": "Internacional vs Sao Paulo",
+            "1/2 Goal": {
+                "HomeOdds": "1.09",
+                "AwayOdds": "5.50"
+            }
+        },
+        "5914": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "8.15am",
+            "Matchup": "Atletico Lanus vs RC Avellaneda",
+            "1/2 Goal": {
+                "HomeOdds": "1.12",
+                "AwayOdds": "4.80"
+            }
+        },
+        "5911": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "8.15am",
+            "Matchup": "Newell Old Boys vs Instituto ACC",
+            "1/2 Goal": {
+                "HomeOdds": "4.00",
+                "AwayOdds": "1.18"
+            }
+        },
+        "4950": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "8.30am",
+            "Matchup": "EC Bahia vs Fortaleza",
+            "1/2 Goal": {
+                "HomeOdds": "4.00",
+                "AwayOdds": "1.18"
+            }
+        },
+        "4952": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "8.30am",
+            "Matchup": "Palmeiras vs Vasco da Gama",
+            "1/2 Goal": {
+                "HomeOdds": "2.10",
+                "AwayOdds": "1.60"
+            }
+        },
+        "0145": {
+            "Date": "Fri, 14 Jun 2024",
+            "Time": "7.45pm",
+            "Matchup": "Hougang vs Geylang",
+            "1/2 Goal": {
+                "HomeOdds": "1.33",
+                "AwayOdds": "2.75"
+            }
+        },
+        "2018": {
+            "Date": "Sat, 15 Jun 2024",
+            "Time": "3.00am",
+            "Matchup": "Germany vs Scotland",
+            "1/2 Goal": {
+                "HomeOdds": "1.67",
+                "AwayOdds": "2.00"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.92",
+                "HomeHandicap": "-0.75",
+                "AwayOdds": "1.80",
+                "AwayHandicap": "+0.75"
+            }
+        },
+        "5909": {
+            "Date": "Sat, 15 Jun 2024",
+            "Time": "6.00am",
+            "Matchup": "Boca Juniors vs Velez Sarsfield",
+            "1/2 Goal": {
+                "HomeOdds": "4.40",
+                "AwayOdds": "1.15"
+            }
+        },
+        "5908": {
+            "Date": "Sat, 15 Jun 2024",
+            "Time": "6.00am",
+            "Matchup": "Talleres Cordoba vs Platense",
+            "1/2 Goal": {
+                "HomeOdds": "3.15",
+                "AwayOdds": "1.28"
+            }
+        },
+        "4652": {
+            "Date": "Sat, 15 Jun 2024",
+            "Time": "7.30am",
+            "Matchup": "NY City FC vs Columbus Crew",
+            "1/2 Goal": {
+                "HomeOdds": "4.40",
+                "AwayOdds": "1.15"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.88",
+                "HomeHandicap": "-0.25",
+                "AwayOdds": "1.93",
+                "AwayHandicap": "+0.25"
+            }
+        },
+        "3154": {
+            "Date": "Sat, 15 Jun 2024",
+            "Time": "3.00pm",
+            "Matchup": "Yokohama FM vs Machida Zelvia",
+            "1/2 Goal": {
+                "HomeOdds": "1.10",
+                "AwayOdds": "5.20"
+            }
+        },
+        "2649": {
+            "Date": "Sat, 15 Jun 2024",
+            "Time": "5.00pm",
+            "Matchup": "Fujieda FC vs FC Yokohama",
+            "1/2 Goal": {
+                "HomeOdds": "1.30",
+                "AwayOdds": "3.05"
+            }
+        },
+        "3181": {
+            "Date": "Sat, 15 Jun 2024",
+            "Time": "5.30pm",
+            "Matchup": "S Hiroshima vs Tokyo Verdy",
+            "1/2 Goal": {
+                "HomeOdds": "2.45",
+                "AwayOdds": "1.45"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.93",
+                "HomeHandicap": "-1",
+                "AwayOdds": "1.88",
+                "AwayHandicap": "+1"
+            }
+        },
+        "3147": {
+            "Date": "Sat, 15 Jun 2024",
+            "Time": "6.00pm",
+            "Matchup": "Cerezo Osaka vs Urawa Reds",
+            "1/2 Goal": {
+                "HomeOdds": "1.07",
+                "AwayOdds": "6.00"
+            }
+        },
+        "3149": {
+            "Date": "Sat, 15 Jun 2024",
+            "Time": "6.00pm",
+            "Matchup": "Kyoto Sanga vs C Sapporo",
+            "1/2 Goal": {
+                "HomeOdds": "5.20",
+                "AwayOdds": "1.10"
+            }
+        },
+        "2658": {
+            "Date": "Sat, 15 Jun 2024",
+            "Time": "6.00pm",
+            "Matchup": "Kagoshima Utd vs M Yamagata",
+            "1/2 Goal": {
+                "HomeOdds": "1.09",
+                "AwayOdds": "5.50"
+            }
+        },
+        "2024": {
+            "Date": "Sat, 15 Jun 2024",
+            "Time": "9.00pm",
+            "Matchup": "Hungary vs Switzerland",
+            "1/2 Goal": {
+                "HomeOdds": "1.20",
+                "AwayOdds": "3.75"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.87",
+                "HomeHandicap": "+0.25",
+                "AwayOdds": "1.85",
+                "AwayHandicap": "-0.25"
+            }
+        },
+        "2023": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "12.00am",
+            "Matchup": "Spain vs Croatia",
+            "1/2 Goal": {
+                "HomeOdds": "3.50",
+                "AwayOdds": "1.23"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.87",
+                "HomeHandicap": "-0.5",
+                "AwayOdds": "1.90",
+                "AwayHandicap": "+0.5"
+            }
+        },
+        "2025": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "3.00am",
+            "Matchup": "Italy vs Albania",
+            "1/2 Goal": {
+                "HomeOdds": "1.95",
+                "AwayOdds": "1.70"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.85",
+                "HomeHandicap": "-1.25",
+                "AwayOdds": "1.92",
+                "AwayHandicap": "+1.25"
+            }
+        },
+        "4671": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "7.30am",
+            "Matchup": "Atlanta Utd vs Houston Dynamo",
+            "1/2 Goal": {
+                "HomeOdds": "4.00",
+                "AwayOdds": "1.18"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.80",
+                "HomeHandicap": "-0.25",
+                "AwayOdds": "2.02",
+                "AwayHandicap": "+0.25"
+            }
+        },
+        "4659": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "7.30am",
+            "Matchup": "Charlotte FC vs DC United",
+            "1/2 Goal": {
+                "HomeOdds": "4.00",
+                "AwayOdds": "1.18"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.77",
+                "HomeHandicap": "-0.25",
+                "AwayOdds": "2.03",
+                "AwayHandicap": "+0.25"
+            }
+        },
+        "4660": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "7.30am",
+            "Matchup": "Montreal Impact vs Real Salt Lake",
+            "1/2 Goal": {
+                "HomeOdds": "1.20",
+                "AwayOdds": "3.75"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.80",
+                "HomeHandicap": "+0.5",
+                "AwayOdds": "1.97",
+                "AwayHandicap": "-0.5"
+            }
+        },
+        "4649": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "7.30am",
+            "Matchup": "NE Revolution vs Vancouver W",
+            "1/2 Goal": {
+                "HomeOdds": "4.80",
+                "AwayOdds": "1.12"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "2.02",
+                "HomeHandicap": "-0.25",
+                "AwayOdds": "1.80",
+                "AwayHandicap": "+0.25"
+            }
+        },
+        "4667": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "7.30am",
+            "Matchup": "NY Red Bulls vs Nashville SC",
+            "1/2 Goal": {
+                "HomeOdds": "3.05",
+                "AwayOdds": "1.30"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.97",
+                "HomeHandicap": "-0.75",
+                "AwayOdds": "1.85",
+                "AwayHandicap": "+0.75"
+            }
+        },
+        "4683": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "7.30am",
+            "Matchup": "Orlando City vs Los Angeles FC",
+            "1/2 Goal": {
+                "HomeOdds": "5.50",
+                "AwayOdds": "1.09"
+            }
+        },
+        "4645": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "7.30am",
+            "Matchup": "Philadelphia U vs Inter Miami",
+            "1/2 Goal": {
+                "HomeOdds": "3.05",
+                "AwayOdds": "1.30"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.80",
+                "HomeHandicap": "-0.5",
+                "AwayOdds": "2.00",
+                "AwayHandicap": "+0.5"
+            }
+        },
+        "4674": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "7.30am",
+            "Matchup": "Toronto FC vs Chicago Fire",
+            "1/2 Goal": {
+                "HomeOdds": "3.35",
+                "AwayOdds": "1.25"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.80",
+                "HomeHandicap": "-0.5",
+                "AwayOdds": "1.95",
+                "AwayHandicap": "+0.5"
+            }
+        },
+        "4686": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "8.30am",
+            "Matchup": "FC Dallas vs St Louis City",
+            "1/2 Goal": {
+                "HomeOdds": "4.80",
+                "AwayOdds": "1.12"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "2.02",
+                "HomeHandicap": "-0.25",
+                "AwayOdds": "1.80",
+                "AwayHandicap": "+0.25"
+            }
+        },
+        "4665": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "9.30am",
+            "Matchup": "Colorado Rapids vs Austin FC",
+            "1/2 Goal": {
+                "HomeOdds": "2.60",
+                "AwayOdds": "1.40"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.80",
+                "HomeHandicap": "-0.75",
+                "AwayOdds": "2.02",
+                "AwayHandicap": "+0.75"
+            }
+        },
+        "4675": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "10.30am",
+            "Matchup": "LA Galaxy vs Sporting KC",
+            "1/2 Goal": {
+                "HomeOdds": "2.50",
+                "AwayOdds": "1.43"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "2.00",
+                "HomeHandicap": "-1",
+                "AwayOdds": "1.82",
+                "AwayHandicap": "+1"
+            }
+        },
+        "4661": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "10.30am",
+            "Matchup": "San Jose Quakes vs FC Cincinnati",
+            "1/2 Goal": {
+                "HomeOdds": "1.12",
+                "AwayOdds": "4.80"
+            }
+        },
+        "4680": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "10.30am",
+            "Matchup": "Seattle Sndrs vs Minnesota Utd",
+            "1/2 Goal": {
+                "HomeOdds": "2.80",
+                "AwayOdds": "1.35"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.88",
+                "HomeHandicap": "-0.75",
+                "AwayOdds": "1.93",
+                "AwayHandicap": "+0.75"
+            }
+        },
+        "3164": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "1.00pm",
+            "Matchup": "Vissel Kobe vs Kawasaki F",
+            "1/2 Goal": {
+                "HomeOdds": "3.50",
+                "AwayOdds": "1.23"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.80",
+                "HomeHandicap": "-0.5",
+                "AwayOdds": "1.95",
+                "AwayHandicap": "+0.5"
+            }
+        },
+        "3160": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "2.30pm",
+            "Matchup": "Avispa Fukuoka vs Sagan Tosu",
+            "1/2 Goal": {
+                "HomeOdds": "3.75",
+                "AwayOdds": "1.20"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.92",
+                "HomeHandicap": "-0.5",
+                "AwayOdds": "1.82",
+                "AwayHandicap": "+0.5"
+            }
+        },
+        "2664": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "3.00pm",
+            "Matchup": "Iwaki FC vs Ventforet Kofu",
+            "1/2 Goal": {
+                "HomeOdds": "4.40",
+                "AwayOdds": "1.15"
+            }
+        },
+        "2667": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "4.00pm",
+            "Matchup": "Mito Hollyhock vs Blaublitz Akita",
+            "1/2 Goal": {
+                "HomeOdds": "6.70",
+                "AwayOdds": "1.05"
+            }
+        },
+        "3161": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "5.00pm",
+            "Matchup": "FC Tokyo vs Jubilo Iwata",
+            "1/2 Goal": {
+                "HomeOdds": "4.00",
+                "AwayOdds": "1.18"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.97",
+                "HomeHandicap": "-0.5",
+                "AwayOdds": "1.80",
+                "AwayHandicap": "+0.5"
+            }
+        },
+        "3166": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "5.00pm",
+            "Matchup": "Gamba Osaka vs Kashiwa Reysol",
+            "1/2 Goal": {
+                "HomeOdds": "5.20",
+                "AwayOdds": "1.10"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "2.07",
+                "HomeHandicap": "-0.25",
+                "AwayOdds": "1.77",
+                "AwayHandicap": "+0.25"
+            }
+        },
+        "3162": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "5.00pm",
+            "Matchup": "Kashima Antlers vs Albirex Niigata",
+            "1/2 Goal": {
+                "HomeOdds": "3.50",
+                "AwayOdds": "1.23"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.80",
+                "HomeHandicap": "-0.5",
+                "AwayOdds": "1.95",
+                "AwayHandicap": "+0.5"
+            }
+        },
+        "3175": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "5.00pm",
+            "Matchup": "Nagoya Grampus vs Shonan Bellmare",
+            "1/2 Goal": {
+                "HomeOdds": "4.40",
+                "AwayOdds": "1.15"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.80",
+                "HomeHandicap": "-0.25",
+                "AwayOdds": "2.02",
+                "AwayHandicap": "+0.25"
+            }
+        },
+        "2675": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "5.00pm",
+            "Matchup": "Ehime FC vs Shimizu S Pulse",
+            "1/2 Goal": {
+                "HomeOdds": "1.48",
+                "AwayOdds": "2.35"
+            }
+        },
+        "2655": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "5.00pm",
+            "Matchup": "Oita Trinita vs Tochigi SC",
+            "1/2 Goal": {
+                "HomeOdds": "4.00",
+                "AwayOdds": "1.18"
+            }
+        },
+        "2638": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "5.00pm",
+            "Matchup": "Roasso Kumamoto vs Fagiano Okayama",
+            "1/2 Goal": {
+                "HomeOdds": "1.09",
+                "AwayOdds": "5.50"
+            }
+        },
+        "2647": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "5.00pm",
+            "Matchup": "Vegalta Sendai vs Varen Nagasaki",
+            "1/2 Goal": {
+                "HomeOdds": "1.09",
+                "AwayOdds": "5.50"
+            }
+        },
+        "2680": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "5.30pm",
+            "Matchup": "Thespa Kusatsu vs R Yamaguchi",
+            "1/2 Goal": {
+                "HomeOdds": "1.18",
+                "AwayOdds": "4.00"
+            }
+        },
+        "2646": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "6.00pm",
+            "Matchup": "JEF Utd Chiba vs Tokushima V",
+            "1/2 Goal": {
+                "HomeOdds": "3.05",
+                "AwayOdds": "1.30"
+            }
+        },
+        "2020": {
+            "Date": "Sun, 16 Jun 2024",
+            "Time": "9.00pm",
+            "Matchup": "Poland vs Holland",
+            "1/2 Goal": {
+                "HomeOdds": "1.53",
+                "AwayOdds": "2.25"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.90",
+                "HomeHandicap": "+1",
+                "AwayOdds": "1.87",
+                "AwayHandicap": "-1"
+            }
+        },
+        "2029": {
+            "Date": "Mon, 17 Jun 2024",
+            "Time": "12.00am",
+            "Matchup": "Slovenia vs Denmark",
+            "1/2 Goal": {
+                "HomeOdds": "1.35",
+                "AwayOdds": "2.80"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.82",
+                "HomeHandicap": "+0.75",
+                "AwayOdds": "1.90",
+                "AwayHandicap": "-0.75"
+            }
+        },
+        "2028": {
+            "Date": "Mon, 17 Jun 2024",
+            "Time": "3.00am",
+            "Matchup": "Serbia vs England",
+            "1/2 Goal": {
+                "HomeOdds": "1.67",
+                "AwayOdds": "2.00"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.85",
+                "HomeHandicap": "+1.25",
+                "AwayOdds": "1.90",
+                "AwayHandicap": "-1.25"
+            }
+        },
+        "2027": {
+            "Date": "Mon, 17 Jun 2024",
+            "Time": "9.00pm",
+            "Matchup": "Romania vs Ukraine",
+            "1/2 Goal": {
+                "HomeOdds": "1.23",
+                "AwayOdds": "3.50"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.85",
+                "HomeHandicap": "+0.5",
+                "AwayOdds": "1.92",
+                "AwayHandicap": "-0.5"
+            }
+        },
+        "2030": {
+            "Date": "Tue, 18 Jun 2024",
+            "Time": "12.00am",
+            "Matchup": "Belgium vs Slovakia",
+            "1/2 Goal": {
+                "HomeOdds": "2.05",
+                "AwayOdds": "1.63"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.97",
+                "HomeHandicap": "-1.25",
+                "AwayOdds": "1.80",
+                "AwayHandicap": "+1.25"
+            }
+        },
+        "2032": {
+            "Date": "Tue, 18 Jun 2024",
+            "Time": "3.00am",
+            "Matchup": "Austria vs France",
+            "1/2 Goal": {
+                "HomeOdds": "1.58",
+                "AwayOdds": "2.15"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "2.05",
+                "HomeHandicap": "+1",
+                "AwayOdds": "1.75",
+                "AwayHandicap": "-1"
+            }
+        },
+        "2026": {
+            "Date": "Wed, 19 Jun 2024",
+            "Time": "12.00am",
+            "Matchup": "Turkey vs Georgia",
+            "1/2 Goal": {
+                "HomeOdds": "2.70",
+                "AwayOdds": "1.37"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.92",
+                "HomeHandicap": "-0.75",
+                "AwayOdds": "1.80",
+                "AwayHandicap": "+0.75"
+            }
+        },
+        "2033": {
+            "Date": "Wed, 19 Jun 2024",
+            "Time": "3.00am",
+            "Matchup": "Portugal vs Czech Republic",
+            "1/2 Goal": {
+                "HomeOdds": "2.30",
+                "AwayOdds": "1.50"
+            },
+            "Asian Handicap/HT Asian Handicap": {
+                "HomeOdds": "1.87",
+                "HomeHandicap": "-1",
+                "AwayOdds": "1.92",
+                "AwayHandicap": "+1"
+            }
+        }
+    }
+}
