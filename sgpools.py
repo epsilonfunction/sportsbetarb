@@ -102,7 +102,7 @@ class SgPoolsWriter(SgPools):
             json_file.write("")
 
     def Save(self):
-        with open(self._toJson,"w") as json_file:
+        with open(self._toJson,"a") as json_file:
             json_file.write(json.dumps(self._JsonDict))
         
 
@@ -130,7 +130,7 @@ class SgPoolsScraper(SgPools):
     
     def SetWriter(self, Writer:SgPoolsWriter=None):
         self._Writer=Writer
-        self._Writer.Clear() #Clears the Json Data from previous runs of file.
+        # self._Writer.Clear() #Clears the Json Data from previous runs of file. #MOVED TO MAIN()
         self._Writer._JsonDict={"Date":[],
                                 "EventID":[],
                                 "Events":{}}
@@ -144,7 +144,7 @@ class SgPoolsScraper(SgPools):
     
     # def BetTypeSelector(self):
     
-    def DriverInit(self,options):
+    async def DriverInit(self,options):
         #TODO: implement options here
         self._options = webdriver.ChromeOptions()
         self._options.add_argument("--headless")
@@ -154,9 +154,6 @@ class SgPoolsScraper(SgPools):
         time.sleep(15)
 
         return self._driver
-
-    # async def
-    
 
     async def ScrapeBet(self,
                         EventText:str,
@@ -177,6 +174,14 @@ class SgPoolsScraper(SgPools):
         select_bet = Select(bet_type_selector).select_by_visible_text(
             EventText
         )
+
+        try:
+        # Load More Button
+            load_button = self._driver.find_element(By.CLASS_NAME,"event-list__load-all-events")
+            load_button.click()
+        except: 
+            pass
+
         
         # Clicks on the display bet button to load the bet details
         display_bet=self._driver.find_element(
@@ -184,7 +189,7 @@ class SgPoolsScraper(SgPools):
         display_bet.click()
 
         #wait for elements to appear
-        time.sleep(3.0) 
+        time.sleep(15.0) 
 
         # Gets all group of events 
         events = self._driver.find_elements(
@@ -514,23 +519,63 @@ class SgPoolsScraper(SgPools):
     
         return None
     
+
+
+def main():
+    Writer = SgPoolsWriter()
+    Writer.SetDir(directory="sgpools_datacleaning.log",dirtype="Log")
+    Writer.SetDir(directory="sg_pools.json",dirtype="Json")
+    Writer.Clear()
+
+    Implemented_BetTypes = [
+        "1X2",
+        "Asian Handicap/HT Asian Handicap",
+        "Halftime 1x2",
+        "1/2 Goal"
+    ]
+
+    async def AsyncSgPools(BetType:str,Writer:SgPoolsWriter):
+        Scraper = SgPoolsScraper()
+        Scraper.SetWriter(Writer=Writer)
+        await Scraper.DriverInit(options=None)
+        starttime = time.time()
+        print(f"Started Scraping: {BetType}, Start Time: {starttime}")
+        await Scraper.ScrapeBet(BetType)
+        Scraper._Writer.Save()
+        print(f"Finished Scraping: {BetType}, Start Time: {starttime},\
+              End Time: {time.time()}, Total Elapsed Time: {time.time()-starttime}")
+
+    async def AsyncSgPoolsTask():
+        tasks = []
+        for bet_type in Implemented_BetTypes:
+            tasks.append(asyncio.create_task(AsyncSgPools(bet_type, Writer)))
+        await asyncio.gather(*tasks)
+
+    asyncio.run(AsyncSgPoolsTask())
+    print("Job Done")
+
+    return None 
     
 if __name__ == "__main__":
 
+    main()
 
-    Scraper = SgPoolsScraper()
-    Writer = SgPoolsWriter()
-    Writer.SetDir(directory="sgpools_datacleaning.log",dirtype="Log")
-    # Writer.SetDir(directory="sgpools_datacleaning.log",dirtype="Scrape")
-    Writer.SetDir(directory="sg_pools.json",dirtype="Json")
+    # Scraper = SgPoolsScraper()
+    # Writer = SgPoolsWriter()
+    # Writer.SetDir(directory="sgpools_datacleaning.log",dirtype="Log")
+    # # Writer.SetDir(directory="sgpools_datacleaning.log",dirtype="Scrape")
+    # Writer.SetDir(directory="sg_pools.json",dirtype="Json")
     
-    # input("Initate successful. Press any key to continue")
-    Scraper.SetWriter(Writer=Writer)
-    Scraper.DriverInit(options=None)
+    # # input("Initate successful. Press any key to continue")
+    # Scraper.SetWriter(Writer=Writer)
+    # Writer._Writer.Clear()
+    # Scraper.DriverInit(options=None)
     # Scraper.Scrape()
-    asyncio.run(Scraper.ScrapeBet("1X2"))
-    asyncio.run(Scraper.ScrapeBet("Asian Handicap/HT Asian Handicap"))
-    asyncio.run(Scraper.ScrapeBet("Halftime 1x2"))
-    asyncio.run(Scraper.ScrapeBet("1/2 Goal"))
+    # asyncio.run(Scraper.ScrapeBet("1X2"))
+    # asyncio.run(Scraper.ScrapeBet("Asian Handicap/HT Asian Handicap"))
+    # asyncio.run(Scraper.ScrapeBet("Halftime 1x2"))
+    # asyncio.run(Scraper.ScrapeBet("1/2 Goal"))
     
-    Scraper._Writer.Save()
+    # Scraper._Writer.Save()
+
+    
