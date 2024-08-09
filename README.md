@@ -10,6 +10,7 @@ Key Steps:
     Targets:
         - Singapore Pools
         - 1xbet
+        - 22bet
         
 2) Use Apache Airflow to orchestrate the different python webscraping files
 3) Warehouse it on local PostgreSQL/NoSQL database. 
@@ -29,6 +30,14 @@ pip install -r requirements.txt
     
     pipreqs ./ --ignore .venv
  
+Step 3: 
+    a. Start MongoDB server
+        net start mongodb
+    b. stop MongoDB server
+        net stop mongodb
+    Default Port: localhost:27017
+
+
 
 Requirements:
 - Python 3.9
@@ -48,10 +57,27 @@ Unofficial Requirements:
 Issues:
 1) Chromedriver Path not defined. Always downloaded and unzipped. May want to work on this
 
+## Branches
+1. Main 
+    Production Branch
+2. Testing/Prototyping (Not created Yet)
+    As name suggests
+3. sgpools
+    Conversionof sgpools notebook into functional environment.
 
 ## Branches
 1. Main 
     Production Branch
+<<<<<<< HEAD
+2. Testing/Prototyping (Not created Yet)
+    Some preliminary prototypes
+    2.1. 22bet: A scrape of https://22bets.me/en/live/football
+    
+3. sgpools
+    Conversionof sgpools notebook into functional environment.
+4. 
+
+=======
 2. Testing/Prototyping
     - Docker Deployment of sgpools (might merge into sgpools once sgpools is ready)
     - PyMongo (Not created Yet)
@@ -66,11 +92,14 @@ Issues:
     9) Testcase Writing/Saving
         a) Event stream
         b) HTML scrape
+>>>>>>> 346781a95a8cf2271ad193d7da7079936a4578fb
 
 Misc 1: Accessing .venv for admin purposes
 # cd .venv/Scripts
 # . activate
 # cd ../..
+
+
 
 
 Proposed Schema:
