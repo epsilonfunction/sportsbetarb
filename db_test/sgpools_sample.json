@@ -1,0 +1,461 @@
+{
+    "Date": [
+        "Tue, 28 May 2024",
+        "Wed, 29 May 2024",
+        "Thu, 30 May 2024"
+    ],
+    "EventID": [
+        "5412",
+        "5415",
+        "1189",
+        "5985",
+        "5983",
+        "4113",
+        "4118",
+        "5411",
+        "7376",
+        "7375",
+        "7378",
+        "7442",
+        "7377",
+        "7380",
+        "7443",
+        "7444",
+        "3132",
+        "5422",
+        "4699",
+        "4633",
+        "4631",
+        "4658",
+        "4611",
+        "4634",
+        "4642",
+        "4644",
+        "4632",
+        "4654",
+        "4648",
+        "4640"
+    ],
+    "Events": {
+        "5412": {
+            "Date": "Tue, 28 May 2024",
+            "Time": "1.00am",
+            "Matchup": "Norrkoping vs Varnamo",
+            "1/2 Goal": {
+                "HomeOdds": "3.55",
+                "AwayOdds": "1.22"
+            },
+            "1X2": {
+                "HomeOdds": "1.90",
+                "DrawOdds": "3.30",
+                "AwayOdds": "3.40"
+            }
+        },
+        "5415": {
+            "Date": "Tue, 28 May 2024",
+            "Time": "1.10am",
+            "Matchup": "AIK Stockholm vs IFK Gothenburg",
+            "1/2 Goal": {
+                "HomeOdds": "3.55",
+                "AwayOdds": "1.22"
+            },
+            "1X2": {
+                "HomeOdds": "1.95",
+                "DrawOdds": "3.20",
+                "AwayOdds": "3.40"
+            }
+        },
+        "1189": {
+            "Date": "Tue, 28 May 2024",
+            "Time": "2.30am",
+            "Matchup": "Dusseldorf vs Bochum",
+            "1/2 Goal": {
+                "HomeOdds": "3.15",
+                "AwayOdds": "1.28"
+            },
+            "1X2": {
+                "HomeOdds": "1.95",
+                "DrawOdds": "3.70",
+                "AwayOdds": "3.00"
+            }
+        },
+        "5985": {
+            "Date": "Tue, 28 May 2024",
+            "Time": "6.00am",
+            "Matchup": "Union Santa Fe vs Barracas Central",
+            "1/2 Goal": {
+                "HomeOdds": "3.75",
+                "AwayOdds": "1.20"
+            },
+            "1X2": {
+                "HomeOdds": "1.82",
+                "DrawOdds": "3.10",
+                "AwayOdds": "3.90"
+            }
+        },
+        "5983": {
+            "Date": "Tue, 28 May 2024",
+            "Time": "8.00am",
+            "Matchup": "Atl Tucuman vs Platense",
+            "1/2 Goal": {
+                "HomeOdds": "4.80",
+                "AwayOdds": "1.12"
+            },
+            "1X2": {
+                "HomeOdds": "2.00",
+                "DrawOdds": "2.85",
+                "AwayOdds": "3.70"
+            }
+        },
+        "4113": {
+            "Date": "Tue, 28 May 2024",
+            "Time": "6.30pm",
+            "Matchup": "Gwangju FC vs Pohang",
+            "1/2 Goal": {
+                "HomeOdds": "4.80",
+                "AwayOdds": "1.12"
+            },
+            "1X2": {
+                "HomeOdds": "2.15",
+                "DrawOdds": "3.10",
+                "AwayOdds": "2.95"
+            }
+        },
+        "4118": {
+            "Date": "Tue, 28 May 2024",
+            "Time": "6.30pm",
+            "Matchup": "Sangmu vs Seoul",
+            "1/2 Goal": {
+                "HomeOdds": "4.40",
+                "AwayOdds": "1.15"
+            },
+            "1X2": {
+                "HomeOdds": "2.10",
+                "DrawOdds": "3.10",
+                "AwayOdds": "3.10"
+            }
+        },
+        "5411": {
+            "Date": "Wed, 29 May 2024",
+            "Time": "1.00am",
+            "Matchup": "Malmo vs Elfsborg",
+            "1/2 Goal": {
+                "HomeOdds": "1.95",
+                "AwayOdds": "1.70"
+            },
+            "1X2": {
+                "HomeOdds": "1.37",
+                "DrawOdds": "4.50",
+                "AwayOdds": "6.50"
+            }
+        },
+        "7376": {
+            "Date": "Wed, 29 May 2024",
+            "Time": "6.00am",
+            "Matchup": "Atletico Junior vs Botafogo",
+            "1/2 Goal": {
+                "HomeOdds": "1.07",
+                "AwayOdds": "6.00"
+            },
+            "1X2": {
+                "HomeOdds": "2.60",
+                "DrawOdds": "3.00",
+                "AwayOdds": "2.45"
+            }
+        },
+        "7375": {
+            "Date": "Wed, 29 May 2024",
+            "Time": "6.00am",
+            "Matchup": "LDU Quito vs Universitario",
+            "1/2 Goal": {
+                "HomeOdds": "2.25",
+                "AwayOdds": "1.53"
+            },
+            "1X2": {
+                "HomeOdds": "1.40",
+                "DrawOdds": "4.10",
+                "AwayOdds": "6.50"
+            }
+        },
+        "7378": {
+            "Date": "Wed, 29 May 2024",
+            "Time": "6.00am",
+            "Matchup": "Penarol vs Rosario Central",
+            "1/2 Goal": {
+                "HomeOdds": "4.40",
+                "AwayOdds": "1.15"
+            },
+            "1X2": {
+                "HomeOdds": "1.97",
+                "DrawOdds": "3.10",
+                "AwayOdds": "3.40"
+            }
+        },
+        "7442": {
+            "Date": "Wed, 29 May 2024",
+            "Time": "6.00am",
+            "Matchup": "Argentinos Jrs vs Nacional",
+            "1/2 Goal": {
+                "HomeOdds": "2.05",
+                "AwayOdds": "1.63"
+            },
+            "1X2": {
+                "HomeOdds": "1.33",
+                "DrawOdds": "4.20",
+                "AwayOdds": "8.00"
+            }
+        },
+        "7377": {
+            "Date": "Wed, 29 May 2024",
+            "Time": "8.00am",
+            "Matchup": "Bolivar vs Palestino Chile",
+            "1/2 Goal": {
+                "HomeOdds": "1.63",
+                "AwayOdds": "2.05"
+            },
+            "1X2": {
+                "HomeOdds": "1.17",
+                "DrawOdds": "5.50",
+                "AwayOdds": "11.00"
+            }
+        },
+        "7380": {
+            "Date": "Wed, 29 May 2024",
+            "Time": "8.00am",
+            "Matchup": "Flamengo vs Millonarios",
+            "1/2 Goal": {
+                "HomeOdds": "2.20",
+                "AwayOdds": "1.55"
+            },
+            "1X2": {
+                "HomeOdds": "1.12",
+                "DrawOdds": "7.50",
+                "AwayOdds": "11.00"
+            }
+        },
+        "7443": {
+            "Date": "Wed, 29 May 2024",
+            "Time": "8.30am",
+            "Matchup": "Coquimbo Unido vs Bragantino",
+            "1/2 Goal": {
+                "HomeOdds": "1.33",
+                "AwayOdds": "2.90"
+            },
+            "1X2": {
+                "HomeOdds": "4.20",
+                "DrawOdds": "3.60",
+                "AwayOdds": "1.65"
+            }
+        },
+        "7444": {
+            "Date": "Wed, 29 May 2024",
+            "Time": "8.30am",
+            "Matchup": "Internacional vs Belgrano",
+            "1/2 Goal": {
+                "HomeOdds": "2.20",
+                "AwayOdds": "1.55"
+            },
+            "1X2": {
+                "HomeOdds": "1.37",
+                "DrawOdds": "4.10",
+                "AwayOdds": "7.50"
+            }
+        },
+        "3132": {
+            "Date": "Wed, 29 May 2024",
+            "Time": "6.00pm",
+            "Matchup": "Yokohama FM vs Kashiwa Reysol",
+            "1/2 Goal": {
+                "HomeOdds": "4.00",
+                "AwayOdds": "1.18"
+            },
+            "1X2": {
+                "HomeOdds": "2.15",
+                "DrawOdds": "3.40",
+                "AwayOdds": "2.70"
+            }
+        },
+        "5422": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "1.00am",
+            "Matchup": "Mjallby AIF vs BK Hacken",
+            "1/2 Goal": {
+                "HomeOdds": "4.80",
+                "AwayOdds": "1.12"
+            },
+            "1X2": {
+                "HomeOdds": "2.35",
+                "DrawOdds": "3.30",
+                "AwayOdds": "2.55"
+            }
+        },
+        "4699": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "7.30am",
+            "Matchup": "FC Cincinnati vs Nashville SC",
+            "1/2 Goal": {
+                "HomeOdds": "2.70",
+                "AwayOdds": "1.37"
+            },
+            "1X2": {
+                "HomeOdds": "1.65",
+                "DrawOdds": "3.50",
+                "AwayOdds": "4.30"
+            }
+        },
+        "4633": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "7.30am",
+            "Matchup": "Inter Miami vs Atlanta Utd",
+            "1/2 Goal": {
+                "HomeOdds": "2.15",
+                "AwayOdds": "1.58"
+            },
+            "1X2": {
+                "HomeOdds": "1.45",
+                "DrawOdds": "4.40",
+                "AwayOdds": "5.00"
+            }
+        },
+        "4631": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "7.30am",
+            "Matchup": "Montreal Impact vs DC United",
+            "1/2 Goal": {
+                "HomeOdds": "4.80",
+                "AwayOdds": "1.12"
+            },
+            "1X2": {
+                "HomeOdds": "2.40",
+                "DrawOdds": "3.40",
+                "AwayOdds": "2.45"
+            }
+        },
+        "4658": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "7.30am",
+            "Matchup": "NY Red Bulls vs Charlotte FC",
+            "1/2 Goal": {
+                "HomeOdds": "2.50",
+                "AwayOdds": "1.43"
+            },
+            "1X2": {
+                "HomeOdds": "1.58",
+                "DrawOdds": "3.70",
+                "AwayOdds": "4.50"
+            }
+        },
+        "4611": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "7.30am",
+            "Matchup": "Philadelphia U vs Toronto FC",
+            "1/2 Goal": {
+                "HomeOdds": "2.50",
+                "AwayOdds": "1.43"
+            },
+            "1X2": {
+                "HomeOdds": "1.53",
+                "DrawOdds": "3.90",
+                "AwayOdds": "4.70"
+            }
+        },
+        "4634": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "8.30am",
+            "Matchup": "Austin FC vs Portland T",
+            "1/2 Goal": {
+                "HomeOdds": "3.55",
+                "AwayOdds": "1.22"
+            },
+            "1X2": {
+                "HomeOdds": "1.92",
+                "DrawOdds": "3.40",
+                "AwayOdds": "3.20"
+            }
+        },
+        "4642": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "8.30am",
+            "Matchup": "Chicago Fire vs Orlando City",
+            "1/2 Goal": {
+                "HomeOdds": "6.00",
+                "AwayOdds": "1.07"
+            },
+            "1X2": {
+                "HomeOdds": "2.45",
+                "DrawOdds": "3.20",
+                "AwayOdds": "2.45"
+            }
+        },
+        "4644": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "8.30am",
+            "Matchup": "Houston Dynamo vs Colorado Rapids",
+            "1/2 Goal": {
+                "HomeOdds": "3.55",
+                "AwayOdds": "1.22"
+            },
+            "1X2": {
+                "HomeOdds": "1.90",
+                "DrawOdds": "3.40",
+                "AwayOdds": "3.30"
+            }
+        },
+        "4632": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "8.30am",
+            "Matchup": "Sporting KC vs Vancouver W",
+            "1/2 Goal": {
+                "HomeOdds": "4.40",
+                "AwayOdds": "1.15"
+            },
+            "1X2": {
+                "HomeOdds": "2.10",
+                "DrawOdds": "3.30",
+                "AwayOdds": "2.90"
+            }
+        },
+        "4654": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "10.30am",
+            "Matchup": "LA Galaxy vs FC Dallas",
+            "1/2 Goal": {
+                "HomeOdds": "2.30",
+                "AwayOdds": "1.50"
+            },
+            "1X2": {
+                "HomeOdds": "1.48",
+                "DrawOdds": "4.10",
+                "AwayOdds": "5.00"
+            }
+        },
+        "4648": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "10.30am",
+            "Matchup": "Seattle Sndrs vs Real Salt Lake",
+            "1/2 Goal": {
+                "HomeOdds": "3.75",
+                "AwayOdds": "1.20"
+            },
+            "1X2": {
+                "HomeOdds": "1.92",
+                "DrawOdds": "3.30",
+                "AwayOdds": "3.30"
+            }
+        },
+        "4640": {
+            "Date": "Thu, 30 May 2024",
+            "Time": "10.45am",
+            "Matchup": "Los Angeles FC vs Minnesota Utd",
+            "1/2 Goal": {
+                "HomeOdds": "2.35",
+                "AwayOdds": "1.48"
+            },
+            "1X2": {
+                "HomeOdds": "1.50",
+                "DrawOdds": "4.10",
+                "AwayOdds": "4.80"
+            }
+        }
+    }
+}
