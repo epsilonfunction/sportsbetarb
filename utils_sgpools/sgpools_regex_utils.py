@@ -66,6 +66,7 @@ def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
         # # case '1/2 Goal2': return r'\n(\d{4})\n.*?Goal\n01\n([\d.]+)'
         # This is the working one (i think)
         case '1/2 Goal': return r'(\d{4})\n.*?\n.*?\n.*?(?:1/2 Goal\n01\n([\d.]*)).*?\n.*?\n.*?\n([\d.]*)'
+        case "Asian Handicap/HT Asian Handicap": return r'(\d{4})\n.*?\n.*?\n.*?\n.*?\n.*?\n(([\d.]*))\n.*?\n.*?\n.*?\n.*?\n.*?\n(([\d.]*))'
         # # case '1/2 Goal2': return r'\n01\n([\d|\.]*)'
         # case '1/2 Goal1':
         #     return r'\n01\n([\d|\.]*).+?\n02\n([\d|\.]*)'
@@ -82,29 +83,11 @@ def regex_bettype_filter(searchitem:str, complex_pattern:bool=False):
         case 'match_details_pattern':
             # Returns List[ Set(Time, Event ID, Home Team, Away Team) ]
             return r'(\d*\.\d{2}\w{2})[\n\s](\d{4})[\n\s]([\w\s]*) vs ([\w\s]*)\n'
+        case "Handicap 1x2": 
+            return r
         case _ :
             print("False")
             return
-    
-    # if searchitem=='date_pattern':
-    #     return re.compile(r'^(\w{3}, \d{2} \w{3} \d{4})$',re.MULTILINE)
-    # if searchitem=='time_pattern':
-    #     return re.compile(r'(\d\.\d+\w{2})',re.MULTILINE)
-    # if searchitem=='match_pattern':
-    #     return re.compile(r'(\d{4})\\',re.MULTILINE)
-    # if searchitem=='teams_pattern':
-    #     return re.compile(r'^([\w\s]+) vs ([\w\s]+)$',re.MULTILINE)
-    # if searchitem=='odds_pattern':
-    #     return re.compile(r'^(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)\s\n(\d{2})\n(\d+\.\d+)\n([\w\s]+ [-+]\d+\.\d+)$',re.MULTILINE)
-    
-    # if searchitem=='1/2 Goal':
-    #     return re.compile(r'^0[1|2]\n(\d*\.\d*)\n[\w\s]* ([\+|\-][\d|\.]*)*',re.MULTILINE)
-    
-    # if searchitem=='match_details_pattern':
-    #     return r'(\d*\.\d{2}\w{2}) (\d{4})\n([\w\s]*) vs ([\w\s]*)'
-    
-    
-    
     
     # if searchitem=='time_pattern':
     #     return r'^(\d{1,2}.\d{2}(am|pm))$'
