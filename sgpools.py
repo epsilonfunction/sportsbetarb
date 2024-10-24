@@ -8,6 +8,7 @@ import json
 import logging 
 import re
 import asyncio
+import threading
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -66,6 +67,7 @@ class SgPoolsWriter(SgPools):
         self._ScrapeDir=None
         self._toJson=None
         self._JsonDict=None # Declared at SgPoolsScraper class (Constructor class)
+        self._lock = threading.Lock()  # Initialize a lock for thread safety
         
     def SetDir(self,directory:str="",dirtype:str="")->None:
         
@@ -102,8 +104,11 @@ class SgPoolsWriter(SgPools):
             json_file.write("")
 
     def Save(self):
-        with open(self._toJson,"a") as json_file:
-            json_file.write(json.dumps(self._JsonDict))
+        with self._lock:  # Acquire the lock before writing to the file
+            with open(self._toJson, "a") as json_file:
+                json_file.write(json.dumps(self._JsonDict))
+    
+    async def WriteBet(self,ParsedData:list[str],BetType:str):
         
 
 class SgPoolsScraper(SgPools):
@@ -541,15 +546,17 @@ def main():
         starttime = time.time()
         print(f"Started Scraping: {BetType}, Start Time: {starttime}")
         await Scraper.ScrapeBet(BetType)
-        Scraper._Writer.Save()
-        print(f"Finished Scraping: {BetType}, Start Time: {starttime},\
-              End Time: {time.time()}, Total Elapsed Time: {time.time()-starttime}")
+        await asyncio.to_thread(Scraper._Writer.Save)
+        print(f"Finished Scraping: {BetType}, Start Time: {starttime}, "
+              f"End Time: {time.time()}, Total Elapsed Time: {time.time()-starttime}")
 
     async def AsyncSgPoolsTask():
         tasks = []
         for bet_type in Implemented_BetTypes:
             tasks.append(asyncio.create_task(AsyncSgPools(bet_type, Writer)))
         await asyncio.gather(*tasks)
+
+        await asyncio.to_thread(Writer.Save)
 
     asyncio.run(AsyncSgPoolsTask())
     print("Job Done")
