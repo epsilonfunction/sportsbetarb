@@ -109,8 +109,10 @@ class SgPoolsWriter(SgPools):
                 json_file.write(json.dumps(self._JsonDict))
     
     async def WriteBet(self,ParsedData:list[str],BetType:str):
-        
+        pass 
 
+
+    
 class SgPoolsScraper(SgPools):
     """A Generic Class to Scrape defined terms
     """
