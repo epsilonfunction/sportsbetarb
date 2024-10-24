@@ -112,7 +112,6 @@ class SgPoolsWriter(SgPools):
         pass 
 
 
-    
 class SgPoolsScraper(SgPools):
     """A Generic Class to Scrape defined terms
     """
@@ -532,7 +531,7 @@ def main():
     Writer = SgPoolsWriter()
     Writer.SetDir(directory="sgpools_datacleaning.log",dirtype="Log")
     Writer.SetDir(directory="sg_pools.json",dirtype="Json")
-    Writer.Clear()
+    Writer.Clear() 
 
     Implemented_BetTypes = [
         "1X2",
@@ -541,10 +540,23 @@ def main():
         "1/2 Goal"
     ]
 
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    # options.add_argument('--no-sandbox')
+    # options.add_argument('--disable-dev-shm-usage')
+
+    # async def AsyncSgPoolsTask():
+    #     tasks = []
+    #     for bet_type in Implemented_BetTypes:
+    #         tasks.append(asyncio.create_task(AsyncSgPools(bet_type, Writer)))
+    #     await asyncio.gather(*tasks)
+
+    #     await asyncio.to_thread(Writer.Save)
+
     async def AsyncSgPools(BetType:str,Writer:SgPoolsWriter):
         Scraper = SgPoolsScraper()
         Scraper.SetWriter(Writer=Writer)
-        await Scraper.DriverInit(options=None)
+        await Scraper.DriverInit(options=options)
         starttime = time.time()
         print(f"Started Scraping: {BetType}, Start Time: {starttime}")
         await Scraper.ScrapeBet(BetType)
